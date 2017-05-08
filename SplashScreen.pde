@@ -51,9 +51,11 @@ class SplashScreen extends Screen {
     if (context.keyPressed) {
       switch(context.key) {
       case ESC:
-        quit(1);
+        changeScreen(null);
         break;
       }
     }
+    
+    if(frameCount() >= 90) changeScreen(new MainMenu(context));
   }
 }
