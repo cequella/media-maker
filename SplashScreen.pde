@@ -1,26 +1,27 @@
 class SplashScreen extends Screen {
   final String NAME        = "MediaMaker";
-  final int    LOGO_OFFSET = 48;
+  final String LOGO_PATH   = "assets/Logo_big.png";
+  final int    LOGO_SIZE   = 100;
+  final String FONT_PATH   ="Ubuntu-Light-48.vlw";
   final int    TEXT_SIZE   = 32;
+  final int    LOGO_OFFSET = int(1.5*TEXT_SIZE);
 
   // LOGO
   private PImage m_logo;
   private String m_logoPath;
-  private float m_logoSize;
-  private float m_logoX, m_logoY;
+  private float  m_logoSize;
+  private float  m_logoX, m_logoY;
 
   //TIPO
-  private PFont m_font;
+  private PFont  m_font;
   private String m_fontPath;
 
-  public SplashScreen(PApplet t_context, 
-    String t_logoPath, 
-    String t_fontPath, 
-    float t_size) {
+  public SplashScreen(PApplet t_context) {
+      
     super(t_context, "SplashScreen");
-    m_logoPath = t_logoPath;
-    m_fontPath = t_fontPath;
-    m_logoSize = t_size;
+    m_logoPath = LOGO_PATH;
+    m_fontPath = FONT_PATH;
+    m_logoSize = LOGO_SIZE;
     m_logoX    = (width-m_logoSize)/2;
     m_logoY    = (height-m_logoSize)/2;
   }

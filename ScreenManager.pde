@@ -5,10 +5,7 @@ class ScreenManager {
   ScreenManager(PApplet t_context) {
     m_context = t_context;
     
-    m_currentScreen = new SplashScreen(m_context,
-                                        "assets/Logo_big.png", 
-                                        "Ubuntu-Light-48.vlw", 
-                                        100);
+    m_currentScreen = new SplashScreen(m_context);
   }
   
   public void start() {
