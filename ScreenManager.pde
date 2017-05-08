@@ -6,6 +6,8 @@ class ScreenManager {
   }
   
   public void start() {
-    currentScreen.start();
+    if(currentScreen.display() == 1){
+      exit();
+    }
   }
 }

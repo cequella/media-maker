@@ -40,5 +40,5 @@ class SplashScreen extends Screen {
   void load() {
     m_logo = loadImage(m_logoPath);
     m_font = loadFont(m_fontPath);
-  }  
+  }
 }
