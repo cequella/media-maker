@@ -1,25 +1,33 @@
 class Screen {
+  private PApplet m_context;
+  
   private boolean m_ready = false;
   private String  m_title;
   private int m_out;
   
-  public Screen(String t_title) {
-    m_title = t_title;
-    m_out   = 0;
+  public Screen(PApplet t_context, String t_title) {
+    m_context = t_context;
+    m_title   = t_title;
+    m_out     = 0;
+    
     Loader loader = new Loader();
     loader.start();
   }
   
-  protected void notReady(){}
-  protected void ready(){}
-  protected void load(){}
+  protected void notReady(PApplet context){}
+  protected void ready(PApplet context){}
+  protected void load(PApplet context){}
+  protected void events(PApplet context){}
   
   public final int display() {
     if(m_ready) {
-      ready();
+      ready(m_context);
     } else {
-      notReady();
+      notReady(m_context);
     }
+    
+    events(m_context);
+    
     return m_out;
   }
   protected final void quit(int value){
@@ -34,7 +42,7 @@ class Screen {
     }
     @Override
       public void run() {
-      load();
+      load(m_context);
       m_ready=true;
       println("Finish!");
     }

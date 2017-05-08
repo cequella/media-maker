@@ -1,4 +1,4 @@
-final String DISPOSITIVE_SIZE = "SMALL";
+final String DISPOSITIVE_SIZE = "MEDIUM";
 
 ScreenManager screenManager;
 
@@ -11,7 +11,7 @@ void settings() {
     size(800, 600);
   }
   
-  screenManager = new ScreenManager();
+  screenManager = new ScreenManager(this);
 }
 
 void draw() {
