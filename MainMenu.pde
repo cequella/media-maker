@@ -1,24 +1,37 @@
 class MainMenu extends Screen {
   private final int width_3;
   
-  private Card m_card[] = new Card[4];
+  private TopBar m_bar;
+  private Label  m_label, m_subLabel;
+  private Card   m_card[] = new Card[4];
   
   public MainMenu(PApplet t_context) {
-    super(t_context, "MainMenu");
+    super(t_context, "Home");
     width_3 = t_context.width/3;
+    
+    m_bar      = new TopBar(t_context, title());
+    m_label    = new Label(title(), Label.MEDIUM, 10, 15);
+    m_subLabel = new Label("Selecione que tipo de material você precisa produzir:", Label.SMALL, 10, 15);
     
     m_card[0] = new Card(t_context, 0,         0,   width_3, 150);
     m_card[1] = new Card(t_context, width_3,   0,   width_3, 150);
     m_card[2] = new Card(t_context, 2*width_3, 0,   width_3, 150);
     m_card[3] = new Card(t_context, 0,         150, width_3, 150);
     
-    for(Card c : m_card) c.padding(5).setBackground(Palette.main);
+    for(Card c : m_card) c.padding(5).setBackground(Palette.main).label("Teste");
   }
   
   @Override
   void ready(PApplet context){
     setBackground(Palette.accent);
     
+    m_bar.draw();
+    
+    space(20);
+    m_label.draw();
+    m_subLabel.draw();
+    
+    space(15);
     for(Card c : m_card){
       c.draw();
     }
