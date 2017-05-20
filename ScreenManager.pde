@@ -5,7 +5,7 @@ class ScreenManager {
   ScreenManager(PApplet t_context) {
     m_context = t_context;
     
-    m_current = new SplashScreen(m_context);
+    m_current = new MainMenu(m_context);//new SplashScreen(m_context);
   }
   
   public void start() {
