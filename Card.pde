@@ -10,12 +10,14 @@ class Card {
   private String  m_label;
   private int     m_labelWidth=0;
   private PFont   m_font;
+  private PImage  m_icon;
 
   //AUX
-  final int m_left;
-  final int m_top;
-  final int m_right;
-  final int m_bottom;
+  final int   m_left;
+  final int   m_top;
+  final int   m_right;
+  final int   m_bottom;
+  final float m_iconSize;
 
   int m_clickState = CARD_NOT_CLICKED;
 
@@ -26,10 +28,11 @@ class Card {
     m_width = t_width;
     m_height = t_height;
 
-    m_left   = m_x+m_padding;
-    m_top    = m_y+m_padding;
-    m_right  = m_left+m_width-2*m_padding;
-    m_bottom = m_top+m_height-2*m_padding;
+    m_left     = m_x+m_padding;
+    m_top      = m_y+m_padding;
+    m_right    = m_left+m_width-2*m_padding;
+    m_bottom   = m_top+m_height-2*m_padding;
+    m_iconSize = m_height/2.0;
 
     m_font = loadFont(StrResource.fontS);
   }
@@ -63,6 +66,11 @@ class Card {
       text(m_label, (m_left+m_right-m_labelWidth)/2, m_bottom-20);
     }
     updateState();
+    
+    //Icon
+    if(m_icon != null){
+      image(m_icon, m_left+(m_width-m_iconSize)/2.0, m_top+25.0, m_iconSize, m_iconSize);
+    }
   }
 
   public Card padding(int t_padding) {
@@ -77,6 +85,14 @@ class Card {
     m_label = t_label;
     return this;
   }
+  public Card icon(String iconPath) {
+    if(iconPath.isEmpty()){
+      m_icon = null;
+    } else {
+      m_icon = loadImage(iconPath);
+    }
+    return this;
+  }
 
   public boolean clicked() {
     return m_clickState==CARD_CLICKED;
@@ -85,6 +101,10 @@ class Card {
     return m_clickState==CARD_HOLDED;
   }
   public boolean mouseOver() {
+    if(VERBOSITY){
+      
+    }
+    
     return m_context.mouseX > m_left && 
       m_context.mouseX < m_right &&
       m_context.mouseY > m_top &&

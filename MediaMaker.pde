@@ -1,16 +1,18 @@
-final String DISPOSITIVE_SIZE = "MEDIUM";
+final String  DISPOSITIVE_SIZE = "MEDIUM";
+final boolean VERBOSITY = true;
 
 ScreenManager screenManager;
 
 void settings() {
-  if (DISPOSITIVE_SIZE.equals("SMALL")){
+  if (DISPOSITIVE_SIZE.equals("SMALL")) {
     size(600, 400);
   } else if (DISPOSITIVE_SIZE.equals("BIG")) {
     size(1366, 768);
   } else { // DEFAULT
     size(800, 600);
   }
-  
+  //fullScreen();
+
   screenManager = new ScreenManager(this);
 }
 

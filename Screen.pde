@@ -43,9 +43,6 @@ class Screen {
     rect(0,0,width,height);
     fill(255);
   }
-  protected final void space(int spacement){
-    translate(0, spacement);
-  }
   protected final long frameCount(){
     return m_context.frameCount-m_startFrame;
   }
