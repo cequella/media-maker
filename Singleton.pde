@@ -20,14 +20,18 @@ final static class Credits {
   final static String[] creation = new String[]{"001-network.png", 
                                                 "002-presentation.png",
                                                 "003-search-engine.png",
-                                                "004-multimedia.png",};
+                                                "004-multimedia.png",
+                                                "005-power-button.png",
+                                                "006-more.png",};
   final static String[] author   = new String[]{"Madebyoliver from Flaticon", 
                                                 "Freepik from Flaticon",
+                                                "Freepik from Flaticon",
+                                                "Madebyoliver from Flaticon",
                                                 "Freepik from Flaticon",
                                                 "Madebyoliver from Flaticon",};
 }
 
 // WIDGETS
-final int CARD_CLICKED     = 1;
-final int CARD_HOLDED      = 2;
-final int CARD_NOT_CLICKED = 0;
+final int STATE_CLICKED     = 1;
+final int STATE_HOLDED      = 2;
+final int STATE_NOT_CLICKED = 0;

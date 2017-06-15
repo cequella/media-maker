@@ -1,4 +1,4 @@
-class Screen {
+abstract class Screen {
   private PApplet m_context;
   
   private boolean m_ready = false;
@@ -15,10 +15,10 @@ class Screen {
     loader.start();
   }
   
-  @SuppressWarnings("unused") protected void notReady(PApplet context){}
-  @SuppressWarnings("unused") protected void ready(PApplet context){}
-  @SuppressWarnings("unused") protected void load(PApplet context){}
-  @SuppressWarnings("unused") protected void events(PApplet context){}
+  protected abstract void notReady(PApplet context);
+  protected abstract void ready(PApplet context);
+  protected abstract void load(PApplet context);
+  protected abstract void events(PApplet context);
   
   public final Screen display() {
     if(m_ready) {
@@ -56,7 +56,7 @@ class Screen {
   private final class Loader extends Thread {
     @Override
       public void start() {
-      print("Loading '"+m_title+"'...");
+      if(VERBOSITY) print("Loading '"+m_title+"'...");
       super.start();
     }
     @Override

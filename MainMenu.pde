@@ -61,22 +61,11 @@ class MainMenu extends Screen {
     m_topBar = new TopBar(context, title());
   }
   @Override protected void events(PApplet context) {
-    for(int i=0; i<m_card.length; i++){
-      Card card = m_card[i];
-      if(card==null) break;
-      
-      if(card!=m_currentCard){
-        if(card.mouseOver()){
-          activeCard(card);
-        } else {
-          deactiveCard(card);
-        }
-        
-        if(card.clicked()){
-          selectCard(card);
-        }
-      }
+    //TopBar event
+    if(m_topBar != null){
+      if(m_topBar.clicked()) println("Ola mundo");
     }
+    cardEvents();
   }
   
   //-------------------------------------------------
@@ -89,5 +78,25 @@ class MainMenu extends Screen {
   private void selectCard(Card card){
     m_currentCard = card;
     card.setForeground(255).setBackground(Palette.main).iconSize(55.0);
+  }
+  
+  private void cardEvents(){
+    if(m_card == null) return;
+    
+    for(int i=0; i<m_card.length; i++){
+      Card card = m_card[i];
+      if(card==null || card==m_currentCard) continue;
+      
+      if(card.mouseOver()){
+        activeCard(card);
+      } else {
+        deactiveCard(card);
+      }
+      
+      if(card.clicked()){
+        if(VERBOSITY) println("Card \'"+card.label()+"\' clicked");
+        selectCard(card);
+      }
+    }
   }
 }
