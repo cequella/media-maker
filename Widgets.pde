@@ -163,6 +163,7 @@ class Card extends Widget {
     //Text
     if (m_label!=null) {
       fill(m_colorF);
+      textAlign(LEFT, TOP);
       textFont(m_font);
       if (m_labelWidth==0){
         m_labelWidth = int(textWidth(m_label));
@@ -267,10 +268,11 @@ class Label {
 
 // TOP BAR ---------------------------------------------------
 class TopBar extends Widget {
-  private PImage  m_logo;
-  private PImage  m_option;
-  private PFont   m_font;
-  private String  m_title[];
+  private PImage    m_logo;
+  private PImage    m_option;
+  private PFont     m_font;
+  private String    m_title[];
+  private FloatMenu m_floatMenu;
 
   private final static float BAR_HEIGHT      = 50.0;
   private final static float LOGO_PADDING    = 10.0;
@@ -284,17 +286,16 @@ class TopBar extends Widget {
     m_title = new String[t_title.length];
     for (int i=0; i<t_title.length; i++) m_title[i] = t_title[i]+">";
 
-    m_logo = loadImage(StrResource.logo);
-    m_font = loadFont(StrResource.fontM);
+    m_logo   = loadImage(StrResource.logo);
+    m_option = loadImage("assets/006-more.png");
+    m_font   = loadFont(StrResource.fontM);
+    
+    m_floatMenu = new FloatMenu(t_context, 
+      width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE,
+      new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
   public TopBar(PApplet t_context, String t_title) {
-    super(t_context, 0, 0, width, BAR_HEIGHT);
-    m_title = new String[1];
-    m_title[0] = t_title+">";
-
-    m_logo = loadImage(StrResource.logo);
-    m_option = loadImage("assets/006-more.png");
-    m_font = loadFont(StrResource.fontM);
+    this(t_context, new String[]{t_title});
   }
 
   void draw() {
@@ -324,15 +325,30 @@ class TopBar extends Widget {
     clickedChild(null);
     mouseOverOption();
     updateState();
+    
+    //Float menu
+    m_floatMenu.draw();
   }
 
   //Option events
   private void mouseOverOption() {
-    if (mouseX < width-OPTION_SIZE-LOGO_PADDING) return;
-    if (mouseX > width-LOGO_PADDING) return;
-    if (mouseY < LOGO_PADDING) return;
-    if (mouseY > LOGO_PADDING+OPTION_SIZE) return;
+    if (mouseX < width-OPTION_SIZE-LOGO_PADDING){
+      m_floatMenu.hide();
+      return;
+    }
+    if (mouseX > width-LOGO_PADDING){
+      m_floatMenu.hide();
+      return;
+    }
+    if (mouseY < LOGO_PADDING){
+      m_floatMenu.hide();
+      return;
+    }
+    if (mouseY > LOGO_PADDING+OPTION_SIZE){
+      m_floatMenu.hide();
+      return;
+    }
     
-    clickedChild("option");
+    m_floatMenu.show();
   }
 }
