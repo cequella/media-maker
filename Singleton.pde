@@ -4,6 +4,7 @@ final static class Palette {
   final static color secundary      = #EAF2CE;
   final static color secundary_dark = #D6D9BF;
   final static color accent         = #222432;
+  final static color white          = #fafafa;
 };
 
 final static class StrResource {
@@ -14,3 +15,13 @@ final static class StrResource {
   final static String name    = "MediaMaker";
   final static String loading = "Loading...";
 }
+
+final static class Credits {
+  final static String[] creation = new String[]{};
+  final static String[] author   = new String[]{};
+}
+
+// WIDGETS
+final int CARD_CLICKED     = 1;
+final int CARD_HOLDED      = 2;
+final int CARD_NOT_CLICKED = 0;

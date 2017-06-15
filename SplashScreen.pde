@@ -12,7 +12,6 @@ class SplashScreen extends Screen {
   private PFont  m_font;
 
   public SplashScreen(PApplet t_context) {
-      
     super(t_context, "SplashScreen");
     m_logoSize = LOGO_SIZE;
     m_logoX    = (width-m_logoSize)/2;
