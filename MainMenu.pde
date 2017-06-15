@@ -5,6 +5,7 @@ class MainMenu extends Screen {
   private PImage m_logo;
   private Card[] m_card;
   private TopBar m_topBar;
+  private Card   m_currentCard = null;
 
   private float  m_logoSize;
   private float  m_logoX, m_logoY;
@@ -39,16 +40,19 @@ class MainMenu extends Screen {
     m_card = new Card[4];
 
     // Create menu options
-    final String[] label = new String[]{"Vídeo", "Slide", "Site/Blog", "RedeSocial"};
+    final String[] label = new String[]{"Vídeo", "Apresentação", "Site/Blog", "RedeSocial"};
+    final String[] path  = new String[]{"004-multimedia.png", "002-presentation.png", "003-search-engine.png", "001-network.png"};
+    
     final float cardHeight = (height-TopBar.BAR_HEIGHT)/m_card.length;
     for (int i=0; i<m_card.length; i++) {
       m_card[i] = new Card(context, 
                             0,         i*cardHeight+TopBar.BAR_HEIGHT, 
                             width/3.0, cardHeight);
 
-      m_card[i].paint(Palette.main_dark)
+      m_card[i].setBackground(Palette.main_dark)
+        .setForeground(150)
         .label(label[i])
-        .icon("assets/icon-web.png")
+        .icon("assets/"+path[i])
         .iconSize(50.0)
         .roundness(0);
     }
@@ -57,5 +61,33 @@ class MainMenu extends Screen {
     m_topBar = new TopBar(context, title());
   }
   @Override protected void events(PApplet context) {
+    for(int i=0; i<m_card.length; i++){
+      Card card = m_card[i];
+      if(card==null) break;
+      
+      if(card!=m_currentCard){
+        if(card.mouseOver()){
+          activeCard(card);
+        } else {
+          deactiveCard(card);
+        }
+        
+        if(card.clicked()){
+          selectCard(card);
+        }
+      }
+    }
+  }
+  
+  //-------------------------------------------------
+  private void activeCard(Card card){
+    card.setForeground(255).iconSize(55.0);
+  }
+  private void deactiveCard(Card card){
+    card.setForeground(150).setBackground(Palette.main_dark).iconSize(50.0);
+  }
+  private void selectCard(Card card){
+    m_currentCard = card;
+    card.setForeground(255).setBackground(Palette.main).iconSize(55.0);
   }
 }

@@ -3,7 +3,8 @@ class Card {
   private PApplet m_context;
   private float   m_x, m_y, m_width, m_height;
   private float   m_padding;
-  private color   m_color=255;
+  private color   m_colorB=240;
+  private color   m_colorF=255;
   private String  m_label;
   private int     m_labelWidth=0;
   private PFont   m_font;
@@ -52,13 +53,13 @@ class Card {
 
   public void draw() {
     //Container
-    fill(m_color);
+    fill(m_colorB);
     noStroke();
     rect(m_x+m_padding, m_y+m_padding, m_width-2*m_padding, m_height-2*m_padding, m_round);
 
     //Text
     if (m_label!=null) {
-      fill(240);
+      fill(m_colorF);
       textFont(m_font);
       if (m_labelWidth==0) m_labelWidth = int(textWidth(m_label));
       text(m_label, (m_left+m_right-m_labelWidth)/2, m_bottom-20);
@@ -67,9 +68,11 @@ class Card {
     
     //Icon
     if(m_icon != null){
+      tint(m_colorF);
       image(m_icon, 
             m_left+(m_width-m_iconSize)/2.0, m_top+(m_height-m_iconSize)/2.0, 
             m_iconSize,                      m_iconSize);
+      noTint();
     }
   }
 
@@ -77,8 +80,12 @@ class Card {
     m_padding = t_padding;
     return this;
   }
-  public Card paint(color t_color) {
-    m_color = t_color;
+  public Card setBackground(color t_color) {
+    m_colorB = t_color;
+    return this;
+  }
+  public Card setForeground(color t_color) {
+    m_colorF = t_color;
     return this;
   }
   public Card label(String t_label) {
@@ -109,14 +116,10 @@ class Card {
     return m_clickState==CARD_HOLDED;
   }
   public boolean mouseOver() {
-    if(VERBOSITY){
-      
-    }
-    
     return m_context.mouseX > m_left && 
-      m_context.mouseX < m_right &&
-      m_context.mouseY > m_top &&
-      m_context.mouseY < m_bottom;
+            m_context.mouseX < m_right &&
+            m_context.mouseY > m_top &&
+            m_context.mouseY < m_bottom;
   }
 }
 

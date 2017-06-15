@@ -17,8 +17,14 @@ final static class StrResource {
 }
 
 final static class Credits {
-  final static String[] creation = new String[]{};
-  final static String[] author   = new String[]{};
+  final static String[] creation = new String[]{"001-network.png", 
+                                                "002-presentation.png",
+                                                "003-search-engine.png",
+                                                "004-multimedia.png",};
+  final static String[] author   = new String[]{"Madebyoliver from Flaticon", 
+                                                "Freepik from Flaticon",
+                                                "Freepik from Flaticon",
+                                                "Madebyoliver from Flaticon",};
 }
 
 // WIDGETS
