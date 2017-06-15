@@ -63,7 +63,7 @@ class MainMenu extends Screen {
   @Override protected void events(PApplet context) {
     //TopBar event
     if(m_topBar != null){
-      if(m_topBar.clicked()) println("Ola mundo");
+      if(m_topBar.clicked() && m_topBar.child("option")) println("Ola mundo");
     }
     cardEvents();
   }

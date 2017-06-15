@@ -3,10 +3,11 @@ abstract class Widget {
   private PApplet m_context;
   private float   m_x, m_y, m_width, m_height;
   private int     m_clickState = STATE_NOT_CLICKED;
-  private float m_left;
-  private float m_top;
-  private float m_right;
-  private float m_bottom;
+  private float   m_left;
+  private float   m_top;
+  private float   m_right;
+  private float   m_bottom;
+  private String  m_clickedChild;
   
   public Widget(PApplet t_context, float t_x, float t_y, float t_width, float t_height){
     m_context = t_context;
@@ -14,6 +15,11 @@ abstract class Widget {
     m_y = t_y;
     m_width = t_width;
     m_height = t_height;
+    
+    m_left = t_x;
+    m_right = t_x+t_width;
+    m_top = t_y;
+    m_bottom = t_y+t_height;
   }
   public void updateState() {
     if (m_context.mousePressed) {
@@ -70,6 +76,10 @@ abstract class Widget {
   public Widget limits(float t_left, float t_right, float t_top, float t_bottom) {
     return left(t_left).right(t_right).top(t_top).bottom(t_bottom);
   }
+  public Widget clickedChild(String t_child){
+    m_clickedChild = t_child;
+    return this;
+  }
   
   public float x(){
     return m_x;
@@ -109,6 +119,10 @@ abstract class Widget {
       context().mouseX < m_right &&
       context().mouseY > m_top &&
       context().mouseY < m_bottom;
+  }
+  public boolean child(String t_child){
+    if(m_clickedChild == null) return false;
+    return m_clickedChild.equals(t_child);
   }
   
   
@@ -257,7 +271,6 @@ class TopBar extends Widget {
   private PImage  m_option;
   private PFont   m_font;
   private String  m_title[];
-  private int     m_clickState = STATE_NOT_CLICKED;
 
   private final static float BAR_HEIGHT      = 50.0;
   private final static float LOGO_PADDING    = 10.0;
@@ -267,7 +280,7 @@ class TopBar extends Widget {
   private final static float BAR_TITLE_LEFT  = BAR_HEIGHT+10.0;
 
   public TopBar(PApplet t_context, String t_title[]) {
-    super(t_context, 0, 0, 0, 0);
+    super(t_context, 0, 0, width, BAR_HEIGHT);
     m_title = new String[t_title.length];
     for (int i=0; i<t_title.length; i++) m_title[i] = t_title[i]+">";
 
@@ -275,7 +288,7 @@ class TopBar extends Widget {
     m_font = loadFont(StrResource.fontM);
   }
   public TopBar(PApplet t_context, String t_title) {
-    super(t_context, 0, 0, 0, 0);
+    super(t_context, 0, 0, width, BAR_HEIGHT);
     m_title = new String[1];
     m_title[0] = t_title+">";
 
@@ -307,37 +320,19 @@ class TopBar extends Widget {
     image(m_option, 
       width-OPTION_SIZE-LOGO_PADDING, LOGO_PADDING, 
       OPTION_SIZE, OPTION_SIZE);
-      
+    
+    clickedChild(null);
+    mouseOverOption();
     updateState();
   }
 
   //Option events
-  /*public boolean mouseOverOption() {
-    if (mouseX < width-OPTION_SIZE-LOGO_PADDING) return false;
-    if (mouseX > width-LOGO_PADDING) return false;
-    if (mouseY < LOGO_PADDING) return false;
-    if (mouseY > LOGO_PADDING+OPTION_SIZE) return false;
-    return true;
+  private void mouseOverOption() {
+    if (mouseX < width-OPTION_SIZE-LOGO_PADDING) return;
+    if (mouseX > width-LOGO_PADDING) return;
+    if (mouseY < LOGO_PADDING) return;
+    if (mouseY > LOGO_PADDING+OPTION_SIZE) return;
+    
+    clickedChild("option");
   }
-  public boolean clicked() {
-    return m_clickState==STATE_CLICKED;
-  }
-  public boolean holded() {
-    return m_clickState==STATE_HOLDED;
-  }
-  
-  // State machine
-  private void updateState() {
-    if (m_context.mousePressed) {
-      if (mouseOverOption()) {
-        if (m_clickState == STATE_NOT_CLICKED) {
-          m_clickState = STATE_CLICKED;
-        } else if (m_clickState == STATE_CLICKED) {
-          m_clickState = STATE_HOLDED;
-        }
-      }
-    } else {
-      m_clickState = STATE_NOT_CLICKED;
-    }
-  }*/
 }
