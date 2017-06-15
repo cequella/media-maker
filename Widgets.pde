@@ -9,13 +9,13 @@ class Card {
   private PFont   m_font;
   private PImage  m_icon;
   private int     m_round = 3;
+  private float   m_iconSize;
 
   //AUX
   final float m_left;
   final float m_top;
   final float m_right;
   final float m_bottom;
-  final float m_iconSize;
 
   int m_clickState = CARD_NOT_CLICKED;
 
@@ -67,7 +67,9 @@ class Card {
     
     //Icon
     if(m_icon != null){
-      image(m_icon, m_left+(m_width-m_iconSize)/2.0, m_top+25.0, m_iconSize, m_iconSize);
+      image(m_icon, 
+            m_left+(m_width-m_iconSize)/2.0, m_top+(m_height-m_iconSize)/2.0, 
+            m_iconSize,                      m_iconSize);
     }
   }
 
@@ -93,6 +95,10 @@ class Card {
   }
   public Card roundness(int round){
     this.m_round = round;
+    return this;
+  }
+  public Card iconSize(float iconSize){
+    this.m_iconSize = iconSize;
     return this;
   }
 
@@ -167,15 +173,16 @@ class TopBar {
   private PFont   m_font;
   private String  m_title[];
   
-  private final static int BAR_HEIGHT      = 50;
-  private final static int LOGO_PADDING    = 10;
-  private final static int LOGO_SIZE       = BAR_HEIGHT-2*LOGO_PADDING;
-  private final static int BAR_HALF_HEIGHT = BAR_HEIGHT/2;
-  private final static int BAR_TITLE_LEFT  = BAR_HEIGHT+10;
+  private final static float BAR_HEIGHT      = 50.0;
+  private final static float LOGO_PADDING    = 10.0;
+  private final static float LOGO_SIZE       = BAR_HEIGHT-2.0*LOGO_PADDING;
+  private final static float BAR_HALF_HEIGHT = BAR_HEIGHT/2.0;
+  private final static float BAR_TITLE_LEFT  = BAR_HEIGHT+10.0;
   
   public TopBar(PApplet t_context, String t_title[]){
     m_context = t_context;
-    m_title = t_title;
+    m_title = new String[t_title.length];
+    for(int i=0; i<t_title.length; i++) m_title[i] = t_title[i]+">";
     
     m_logo = loadImage(StrResource.logo);
     m_font = loadFont(StrResource.fontM);
@@ -183,7 +190,7 @@ class TopBar {
   public TopBar(PApplet t_context, String t_title){
     m_context = t_context;
     m_title = new String[1];
-    m_title[0] = t_title;
+    m_title[0] = t_title+">";
     
     m_logo = loadImage(StrResource.logo);
     m_font = loadFont(StrResource.fontM);
@@ -201,8 +208,9 @@ class TopBar {
     fill(255);
     textFont(m_font);
     textAlign(LEFT, CENTER);
-    for(String s : m_title){
-      text(s+">", BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
+    for(int i=0; i<m_title.length; i++){
+      final String s = m_title[i];
+      text(s, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
     }
   }
 }
