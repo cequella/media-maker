@@ -33,11 +33,11 @@ class MainMenu extends Screen {
       m_card[i].draw();
     }
 
-    //Draw Top bar
-    m_topBar.draw();
-
     //Draw page viewer
     if (m_current!=null) m_current.draw();
+    
+    //Draw Top bar
+    m_topBar.draw();
   }
   @Override protected void load(PApplet context) {
     m_logo = loadImage(StrResource.logo);

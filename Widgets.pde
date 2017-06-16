@@ -379,6 +379,8 @@ class PageViewer extends Widget {
      m_buttonCoord[1] = y()+height()+m_buttonTopMargin;
      m_buttonCoord[2] = x()+width()-m_buttonSize;
      m_buttonCoord[3] = y()+height()+m_buttonTopMargin;
+     
+     bottom(bottom()+m_buttonTopMargin+m_buttonSize);
   }   
  
   @Override public void draw(){
@@ -396,10 +398,12 @@ class PageViewer extends Widget {
     updateState();
   }
   private void checkClick(){
-    if(clickPrevious()){
-      if(m_current > 0) m_current--;
-    } else if(clickNext()){
-      if(m_current < m_content.length-1) m_current++;
+    if(clicked()){
+      if(clickPrevious() && m_current > 0){
+        m_current--;
+      } else if(clickNext() && m_current < m_content.length-1){
+        m_current++;
+      }
     }
   }
   private boolean clickPrevious(){
