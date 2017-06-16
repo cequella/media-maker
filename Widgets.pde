@@ -8,14 +8,14 @@ abstract class Widget {
   private float   m_right;
   private float   m_bottom;
   private String  m_clickedChild;
-  
-  public Widget(PApplet t_context, float t_x, float t_y, float t_width, float t_height){
+
+  public Widget(PApplet t_context, float t_x, float t_y, float t_width, float t_height) {
     m_context = t_context;
     m_x = t_x;
     m_y = t_y;
     m_width = t_width;
     m_height = t_height;
-    
+
     m_left = t_x;
     m_right = t_x+t_width;
     m_top = t_y;
@@ -34,78 +34,78 @@ abstract class Widget {
       m_clickState = STATE_NOT_CLICKED;
     }
   }
-  
-  public Widget x(float t_x){
+
+  public Widget x(float t_x) {
     m_x = t_x;
     return this;
   }
-  public Widget y(float t_y){
+  public Widget y(float t_y) {
     m_y = t_y;
     return this;
   }
-  public Widget coords(float t_x, float t_y){
+  public Widget coords(float t_x, float t_y) {
     return x(t_x).y(t_y);
   }
-  public Widget width(float t_width){
+  public Widget width(float t_width) {
     m_width = t_width;
     return this;
   }
-  public Widget height(float t_height){
+  public Widget height(float t_height) {
     m_height = t_height;
     return this;
   }
-  public Widget dimension(float t_width, float t_height){
+  public Widget dimension(float t_width, float t_height) {
     return width(t_width).height(t_height);
   }
-  public Widget left(float t_left){
+  public Widget left(float t_left) {
     m_left = t_left;
     return this;
   }
-  public Widget right(float t_right){
+  public Widget right(float t_right) {
     m_right = t_right;
     return this;
   }
-  public Widget top(float t_top){
+  public Widget top(float t_top) {
     m_top = t_top;
     return this;
   }
-  public Widget bottom(float t_bottom){
+  public Widget bottom(float t_bottom) {
     m_bottom = t_bottom;
     return this;
   }
   public Widget limits(float t_left, float t_right, float t_top, float t_bottom) {
     return left(t_left).right(t_right).top(t_top).bottom(t_bottom);
   }
-  public Widget clickedChild(String t_child){
+  public Widget clickedChild(String t_child) {
     m_clickedChild = t_child;
     return this;
   }
-  
-  public float x(){
+
+  public float x() {
     return m_x;
   }
-  public float y(){
+  public float y() {
     return m_y;
   }
-  public float width(){
+  public float width() {
     return m_width;
   }
-  public float height(){
+  public float height() {
     return m_height;
   }
-  public float left(){
+  public float left() {
     return m_left;
   }
-  public float right(){
+  public float right() {
     return m_right;
   }
-  public float top(){
+  public float top() {
     return m_top;
   }
-  public float bottom(){
+  public float bottom() {
     return m_bottom;
   }
-  public PApplet context(){
+  public PApplet context() {
     return m_context;
   }
   public boolean clicked() {
@@ -114,18 +114,18 @@ abstract class Widget {
   public boolean holded() {
     return m_clickState==STATE_HOLDED;
   }
-  public boolean mouseOver(){
+  public boolean mouseOver() {
     return context().mouseX > m_left && 
       context().mouseX < m_right &&
       context().mouseY > m_top &&
       context().mouseY < m_bottom;
   }
-  public boolean child(String t_child){
-    if(m_clickedChild == null) return false;
+  public boolean child(String t_child) {
+    if (m_clickedChild == null) return false;
     return m_clickedChild.equals(t_child);
   }
-  
-  
+
+
   public abstract void draw();
 }
 
@@ -144,10 +144,10 @@ class Card extends Widget {
   public Card(PApplet t_context, float t_x, float t_y, float t_width, float t_height) {
     super(t_context, t_x, t_y, t_width, t_height);
     this.left(t_x+m_padding)
-        .top(t_y+m_padding)
-        .right(left()+t_width-2.0*m_padding)
-        .bottom(top()+t_height-2.0*m_padding);
-        
+      .top(t_y+m_padding)
+      .right(left()+t_width-2.0*m_padding)
+      .bottom(top()+t_height-2.0*m_padding);
+
     m_iconSize = t_height/2.0;
     m_font = loadFont(StrResource.fontS);
   }
@@ -156,16 +156,16 @@ class Card extends Widget {
     //Container
     fill(m_colorB);
     noStroke();
-    rect(x()+m_padding,        y()+m_padding, 
-          width()-2*m_padding, height()-2*m_padding, 
-          m_round);
+    rect(x()+m_padding, y()+m_padding, 
+      width()-2*m_padding, height()-2*m_padding, 
+      m_round);
 
     //Text
     if (m_label!=null) {
       fill(m_colorF);
       textAlign(LEFT, TOP);
       textFont(m_font);
-      if (m_labelWidth==0){
+      if (m_labelWidth==0) {
         m_labelWidth = int(textWidth(m_label));
       }
       text(m_label, (left()+right()-m_labelWidth)/2, bottom()-20);
@@ -214,8 +214,8 @@ class Card extends Widget {
     this.m_iconSize = iconSize;
     return this;
   }
-  
-  public String label(){
+
+  public String label() {
     return m_label;
   }
 }
@@ -291,9 +291,9 @@ class TopBar extends Widget {
     m_logo   = loadImage(StrResource.logo);
     m_option = loadImage("assets/icons/006-more.png");
     m_font   = loadFont(StrResource.fontM);
-    
+
     m_floatMenu = new FloatMenu(t_context, 
-      width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE,
+      width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE, 
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
   public TopBar(PApplet t_context, color t_color, String t_title) {
@@ -323,34 +323,34 @@ class TopBar extends Widget {
     image(m_option, 
       width-OPTION_SIZE-LOGO_PADDING, LOGO_PADDING, 
       OPTION_SIZE, OPTION_SIZE);
-    
+
     clickedChild(null);
     mouseOverOption();
     updateState();
-    
+
     //Float menu
     m_floatMenu.draw();
   }
 
   //Option events
   private void mouseOverOption() {
-    if (mouseX < width-OPTION_SIZE-LOGO_PADDING){
+    if (mouseX < width-OPTION_SIZE-LOGO_PADDING) {
       m_floatMenu.hide();
       return;
     }
-    if (mouseX > width-LOGO_PADDING){
+    if (mouseX > width-LOGO_PADDING) {
       m_floatMenu.hide();
       return;
     }
-    if (mouseY < LOGO_PADDING){
+    if (mouseY < LOGO_PADDING) {
       m_floatMenu.hide();
       return;
     }
-    if (mouseY > LOGO_PADDING+OPTION_SIZE){
+    if (mouseY > LOGO_PADDING+OPTION_SIZE) {
       m_floatMenu.hide();
       return;
     }
-    
+
     m_floatMenu.show();
   }
 }
@@ -363,63 +363,71 @@ class PageViewer extends Widget {
   private float    m_buttonSize = 30.0;
   private float    m_buttonTopMargin = 20.0;
   private int      m_current = 0;
-  
-  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, String[] path){
+
+  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, String[] path) {
     super(t_context, t_x, t_y, t_width, t_height);
-    
+
     m_previous = loadImage("assets/icons/008-back.png");
     m_next = loadImage("assets/icons/007-next.png");
-    
+
     m_content = new PImage[path.length];
-    for(int i=0; i<path.length; i++){
+    for (int i=0; i<path.length; i++) {
       m_content[i] = loadImage(path[i]);
     }
-    
-     m_buttonCoord[0] = x();
-     m_buttonCoord[1] = y()+height()+m_buttonTopMargin;
-     m_buttonCoord[2] = x()+width()-m_buttonSize;
-     m_buttonCoord[3] = y()+height()+m_buttonTopMargin;
-     
-     bottom(bottom()+m_buttonTopMargin+m_buttonSize);
+
+    final float aux = (width()-3.0*m_buttonSize)/2.0;
+
+    m_buttonCoord[0] = x()+aux;
+    m_buttonCoord[1] = y()+height()+m_buttonTopMargin;
+    m_buttonCoord[2] = x()+aux+2.0*m_buttonSize;
+    m_buttonCoord[3] = y()+height()+m_buttonTopMargin;
+
+    bottom(bottom()+m_buttonTopMargin+m_buttonSize);
   }   
- 
-  @Override public void draw(){
-    image(m_content[m_current],
-          x(), y(),
-          width(), height());
-    image(m_previous,
-          m_buttonCoord[0], m_buttonCoord[1], 
-          m_buttonSize, m_buttonSize);
-    image(m_next, 
-          m_buttonCoord[2], m_buttonCoord[3], 
-          m_buttonSize, m_buttonSize);
+
+  @Override public void draw() {
+    image(m_content[m_current], 
+      x(), y(), 
+      width(), height());
     
+    if(m_current == 0) tint(150);
+    image(m_previous, 
+      m_buttonCoord[0], m_buttonCoord[1], 
+      m_buttonSize, m_buttonSize);
+    noTint();
+    
+    if(m_current == m_content.length-1) tint(150);
+    image(m_next, 
+      m_buttonCoord[2], m_buttonCoord[3], 
+      m_buttonSize, m_buttonSize);
+    noTint();
+
     checkClick();
     updateState();
   }
-  private void checkClick(){
-    if(clicked()){
-      if(clickPrevious() && m_current > 0){
+  private void checkClick() {
+    if (clicked()) {
+      if (clickPrevious() && m_current > 0) {
         m_current--;
-      } else if(clickNext() && m_current < m_content.length-1){
+      } else if (clickNext() && m_current < m_content.length-1) {
         m_current++;
       }
     }
   }
-  private boolean clickPrevious(){
-    if(context().mouseX < m_buttonCoord[0]) return false;
-    if(context().mouseX > m_buttonCoord[0]+m_buttonSize) return false;
-    if(context().mouseY < m_buttonCoord[1]) return false;
-    if(context().mouseY > m_buttonCoord[1]+m_buttonSize) return false;
-    
+  private boolean clickPrevious() {
+    if (context().mouseX < m_buttonCoord[0]) return false;
+    if (context().mouseX > m_buttonCoord[0]+m_buttonSize) return false;
+    if (context().mouseY < m_buttonCoord[1]) return false;
+    if (context().mouseY > m_buttonCoord[1]+m_buttonSize) return false;
+
     return true;
   }
-  private boolean clickNext(){
-    if(context().mouseX < m_buttonCoord[2]) return false;
-    if(context().mouseX > m_buttonCoord[2]+m_buttonSize) return false;
-    if(context().mouseY < m_buttonCoord[3]) return false;
-    if(context().mouseY > m_buttonCoord[3]+m_buttonSize) return false;
-    
+  private boolean clickNext() {
+    if (context().mouseX < m_buttonCoord[2]) return false;
+    if (context().mouseX > m_buttonCoord[2]+m_buttonSize) return false;
+    if (context().mouseY < m_buttonCoord[3]) return false;
+    if (context().mouseY > m_buttonCoord[3]+m_buttonSize) return false;
+
     return true;
   }
 }
