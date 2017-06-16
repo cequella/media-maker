@@ -358,19 +358,64 @@ class TopBar extends Widget {
 // PageViewer ---------------------------------------------------
 class PageViewer extends Widget {
   private PImage[] m_content;
+  private PImage   m_previous, m_next;
+  private float[]  m_buttonCoord = new float[4];
+  private float    m_buttonSize = 30.0;
+  private float    m_buttonTopMargin = 20.0;
+  private int      m_current = 0;
   
   public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, String[] path){
     super(t_context, t_x, t_y, t_width, t_height);
     
+    m_previous = loadImage("assets/icons/008-back.png");
+    m_next = loadImage("assets/icons/007-next.png");
+    
     m_content = new PImage[path.length];
     for(int i=0; i<path.length; i++){
-      m_content[i] = loadImage(path[1]);
+      m_content[i] = loadImage(path[i]);
     }
+    
+     m_buttonCoord[0] = x();
+     m_buttonCoord[1] = y()+height()+m_buttonTopMargin;
+     m_buttonCoord[2] = x()+width()-m_buttonSize;
+     m_buttonCoord[3] = y()+height()+m_buttonTopMargin;
   }   
  
   @Override public void draw(){
-    image(m_content[0],
+    image(m_content[m_current],
           x(), y(),
           width(), height());
+    image(m_previous,
+          m_buttonCoord[0], m_buttonCoord[1], 
+          m_buttonSize, m_buttonSize);
+    image(m_next, 
+          m_buttonCoord[2], m_buttonCoord[3], 
+          m_buttonSize, m_buttonSize);
+    
+    checkClick();
+    updateState();
+  }
+  private void checkClick(){
+    if(clickPrevious()){
+      if(m_current > 0) m_current--;
+    } else if(clickNext()){
+      if(m_current < m_content.length-1) m_current++;
+    }
+  }
+  private boolean clickPrevious(){
+    if(context().mouseX < m_buttonCoord[0]) return false;
+    if(context().mouseX > m_buttonCoord[0]+m_buttonSize) return false;
+    if(context().mouseY < m_buttonCoord[1]) return false;
+    if(context().mouseY > m_buttonCoord[1]+m_buttonSize) return false;
+    
+    return true;
+  }
+  private boolean clickNext(){
+    if(context().mouseX < m_buttonCoord[2]) return false;
+    if(context().mouseX > m_buttonCoord[2]+m_buttonSize) return false;
+    if(context().mouseY < m_buttonCoord[3]) return false;
+    if(context().mouseY > m_buttonCoord[3]+m_buttonSize) return false;
+    
+    return true;
   }
 }
