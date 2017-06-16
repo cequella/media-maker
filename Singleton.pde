@@ -1,4 +1,5 @@
 final static class Palette {
+  final static color main_light     = #3d1b4c;
   final static color main           = #48468C;
   final static color main_dark      = #1F0E26;
   final static color secundary      = #EAF2CE;

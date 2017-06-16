@@ -2,10 +2,11 @@ class MainMenu extends Screen {
   final int LOGO_SIZE   = 100;
   final int LOGO_SPEED  = 5;
 
-  private PImage m_logo;
-  private Card[] m_card;
-  private TopBar m_topBar;
-  private Card   m_currentCard = null;
+  private PImage     m_logo;
+  private Card[]     m_card;
+  private TopBar     m_topBar;
+  private PageViewer m_slide, m_video, m_current;
+  private Card       m_currentCard = null;
 
   private float  m_logoSize;
   private float  m_logoX, m_logoY;
@@ -31,9 +32,12 @@ class MainMenu extends Screen {
     for (int i=0; i<m_card.length; i++) {
       m_card[i].draw();
     }
-    
+
     //Draw Top bar
     m_topBar.draw();
+
+    //Draw page viewer
+    if (m_current!=null) m_current.draw();
   }
   @Override protected void load(PApplet context) {
     m_logo = loadImage(StrResource.logo);
@@ -42,60 +46,83 @@ class MainMenu extends Screen {
     // Create menu options
     final String[] label = new String[]{"Vídeo", "Apresentação", "Site/Blog", "RedeSocial"};
     final String[] path  = new String[]{"004-multimedia.png", "002-presentation.png", "003-search-engine.png", "001-network.png"};
-    
+
     final float cardHeight = (height-TopBar.BAR_HEIGHT)/m_card.length;
     for (int i=0; i<m_card.length; i++) {
       m_card[i] = new Card(context, 
-                            0,         i*cardHeight+TopBar.BAR_HEIGHT, 
-                            width/3.0, cardHeight);
+        0, i*cardHeight+TopBar.BAR_HEIGHT, 
+        width/3.0, cardHeight);
 
       m_card[i].setBackground(Palette.main_dark)
         .setForeground(150)
         .label(label[i])
-        .icon("assets/"+path[i])
+        .icon("assets/icons/"+path[i])
         .iconSize(50.0)
         .roundness(0);
     }
-    
+
     //Top bar
-    m_topBar = new TopBar(context, title());
+    m_topBar = new TopBar(context, Palette.main_light, title());
+
+    //Page Viewer TODO width/height
+    final String[] slideList = new String[3];
+    for (int i=0; i<slideList.length; i++) slideList[i] = "assets/info/slide/slide "+(i+1)+".png";
+    m_slide = new PageViewer(context, 
+      width/3.0+10, TopBar.BAR_HEIGHT+10, 
+      530.0-20.0, 340.0-20.0, 
+      slideList);
+
+    final String[] videoList = new String[6];
+    for (int i=0; i<videoList.length; i++) videoList[i] = "assets/info/video/video "+(i+1)+".png";
+    m_video = new PageViewer(context, 
+      width/3.0+10, TopBar.BAR_HEIGHT+10, 
+      530.0-20.0, 340.0-20.0, 
+      videoList);
   }
   @Override protected void events(PApplet context) {
-    //TopBar event
-    if(m_topBar != null){
-      if(m_topBar.clicked() && m_topBar.child("option")) println("Ola mundo");
-    }
     cardEvents();
   }
-  
+
   //-------------------------------------------------
-  private void activeCard(Card card){
+  private void activeCard(Card card) {
     card.setForeground(255).iconSize(55.0);
   }
-  private void deactiveCard(Card card){
+  private void deactiveCard(Card card) {
     card.setForeground(150).setBackground(Palette.main_dark).iconSize(50.0);
   }
-  private void selectCard(Card card){
+  private void selectCard(Card card) {
     m_currentCard = card;
     card.setForeground(255).setBackground(Palette.main).iconSize(55.0);
   }
-  
-  private void cardEvents(){
-    if(m_card == null) return;
-    
-    for(int i=0; i<m_card.length; i++){
+
+  private void cardEvents() {
+    if (m_card == null) return;
+
+    for (int i=0; i<m_card.length; i++) {
       Card card = m_card[i];
-      if(card==null || card==m_currentCard) continue;
-      
-      if(card.mouseOver()){
+      if (card==null || card==m_currentCard) continue;
+
+      if (card.mouseOver()) {
         activeCard(card);
       } else {
         deactiveCard(card);
       }
-      
-      if(card.clicked()){
-        if(VERBOSITY) println("Card \'"+card.label()+"\' clicked");
+
+      if (card.clicked()) {
+        if (VERBOSITY) println("Card \'"+card.label()+"\' clicked");
         selectCard(card);
+
+        switch(i) {
+        case 0:
+          m_current = m_video;
+          break;
+        case 1:
+          m_current = m_slide;
+          break;
+        default:
+          m_current = null;
+        }
+        
       }
     }
   }

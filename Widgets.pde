@@ -272,6 +272,7 @@ class TopBar extends Widget {
   private PImage    m_option;
   private PFont     m_font;
   private String    m_title[];
+  private color     m_color;
   private FloatMenu m_floatMenu;
 
   private final static float BAR_HEIGHT      = 50.0;
@@ -281,26 +282,27 @@ class TopBar extends Widget {
   private final static float BAR_HALF_HEIGHT = BAR_HEIGHT/2.0;
   private final static float BAR_TITLE_LEFT  = BAR_HEIGHT+10.0;
 
-  public TopBar(PApplet t_context, String t_title[]) {
+  public TopBar(PApplet t_context, color t_color, String t_title[]) {
     super(t_context, 0, 0, width, BAR_HEIGHT);
+    m_color = t_color;
     m_title = new String[t_title.length];
     for (int i=0; i<t_title.length; i++) m_title[i] = t_title[i]+">";
 
     m_logo   = loadImage(StrResource.logo);
-    m_option = loadImage("assets/006-more.png");
+    m_option = loadImage("assets/icons/006-more.png");
     m_font   = loadFont(StrResource.fontM);
     
     m_floatMenu = new FloatMenu(t_context, 
       width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE,
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
-  public TopBar(PApplet t_context, String t_title) {
-    this(t_context, new String[]{t_title});
+  public TopBar(PApplet t_context, color t_color, String t_title) {
+    this(t_context, t_color, new String[]{t_title});
   }
 
   void draw() {
     // Draw Bar
-    fill(Palette.main);
+    fill(m_color);
     rect(0, 0, context().width, BAR_HEIGHT);
 
     // Draw Logo
@@ -350,5 +352,25 @@ class TopBar extends Widget {
     }
     
     m_floatMenu.show();
+  }
+}
+
+// PageViewer ---------------------------------------------------
+class PageViewer extends Widget {
+  private PImage[] m_content;
+  
+  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, String[] path){
+    super(t_context, t_x, t_y, t_width, t_height);
+    
+    m_content = new PImage[path.length];
+    for(int i=0; i<path.length; i++){
+      m_content[i] = loadImage(path[1]);
+    }
+  }   
+ 
+  @Override public void draw(){
+    image(m_content[0],
+          x(), y(),
+          width(), height());
   }
 }
