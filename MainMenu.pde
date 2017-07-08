@@ -87,8 +87,9 @@ class MainMenu extends Screen {
   ExpandAnimation[] createVideoList(PApplet context){
     final ExpandAnimation[] videoList = new ExpandAnimation[6];
     for (int i=0; i<videoList.length; i++){
-      videoList[i] = new ExpandAnimation(context, Content.getSlide(i));
-      videoList[i].horizontal();
+      videoList[i] = new ExpandAnimation(context, Content.getVideo(i));
+      
+      if(i == 3 || i == 4) videoList[i].horizontal();
     }
     
     return videoList;
