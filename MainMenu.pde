@@ -22,10 +22,12 @@ class MainMenu extends Screen {
   }
   @Override protected void ready(PApplet context) {
     // Draw Logo
-    image(m_logo, m_logoX, m_logoY, m_logoSize, m_logoSize);
-    if (m_logoX < (4.0*width-3.0*LOGO_SIZE)/6.0) {
-      m_logoX += LOGO_SPEED;
-      return;
+    if(m_current==null){
+      image(m_logo, m_logoX, m_logoY, m_logoSize, m_logoSize);
+      if (m_logoX < (4.0*width-3.0*LOGO_SIZE)/6.0) {
+        m_logoX += LOGO_SPEED;
+        return;
+      }
     }
 
     // Draw Icons

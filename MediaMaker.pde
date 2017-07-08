@@ -11,7 +11,6 @@ void settings() {
   } else { // DEFAULT
     size(800, 600);
   }
-  //fullScreen();
 
   logo = loadImage(StrResource.logo);
   screenManager = new ScreenManager(this);

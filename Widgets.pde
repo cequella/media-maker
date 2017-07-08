@@ -316,9 +316,8 @@ class TopBar extends Widget {
     image(m_option, 
       width-OPTION_SIZE-LOGO_PADDING, LOGO_PADDING, 
       OPTION_SIZE, OPTION_SIZE);
-
-    clickedChild(null);
-    mouseOverOption();
+      
+    checkClick();
     updateState();
 
     //Float menu
@@ -326,25 +325,27 @@ class TopBar extends Widget {
   }
 
   //Option events
-  private void mouseOverOption() {
-    if (mouseX < width-OPTION_SIZE-LOGO_PADDING) {
-      m_floatMenu.hide();
-      return;
+  private void checkClick() {
+    if (clicked()) {
+      if (clickOption()) {
+       m_floatMenu.show();
+      } else  {
+        m_floatMenu.hide();
+      }
     }
-    if (mouseX > width-LOGO_PADDING) {
-      m_floatMenu.hide();
-      return;
-    }
-    if (mouseY < LOGO_PADDING) {
-      m_floatMenu.hide();
-      return;
-    }
-    if (mouseY > LOGO_PADDING+OPTION_SIZE) {
-      m_floatMenu.hide();
-      return;
-    }
+  }
+  private boolean clickOption() {
+    final float MOUSE_X = context().mouseX;
+    final float MOUSE_Y = context().mouseY;
 
-    m_floatMenu.show();
+    if (MOUSE_X < width-LOGO_PADDING-OPTION_SIZE) return false;
+    if (MOUSE_X > width-LOGO_PADDING) return false;
+    if (MOUSE_Y < LOGO_PADDING) return false;
+    if (MOUSE_Y > LOGO_PADDING+OPTION_SIZE) return false;
+
+    if (VERBOSITY) println("Option clicked!");
+
+    return true;
   }
 }
 
@@ -415,8 +416,6 @@ class PageViewer extends Widget {
     if (MOUSE_Y < m_buttonCoord[1]) return false;
     if (MOUSE_Y > m_buttonCoord[1]+m_buttonSize) return false;
 
-    if (VERBOSITY) println("Previous clicked!");
-
     return true;
   }
   private boolean clickNext() {
@@ -427,8 +426,6 @@ class PageViewer extends Widget {
     if (MOUSE_X > m_buttonCoord[2]+m_buttonSize) return false;
     if (MOUSE_Y < m_buttonCoord[3]) return false;
     if (MOUSE_Y > m_buttonCoord[3]+m_buttonSize) return false;
-
-    if (VERBOSITY) println("Next clicked!");
 
     return true;
   }

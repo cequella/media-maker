@@ -51,7 +51,7 @@ class ExpandAnimation {
     
     for(int i=0; i<m_imageList.length; i++){
       m_context.fill(Palette.white);
-      m_context.rect(m_x + i*a + 10, m_y, a-10, m_height+10, 2);
+      m_context.rect(m_x + i*a + 10, m_y, a-10, 250, 2);
       
       // Content
       PImage current = m_imageList[i];

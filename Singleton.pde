@@ -60,9 +60,9 @@ static class Content {
 
     if (index == 0) {
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/009-search.png", 
+        "assets/icons/010-bar-chart.png", 
+        "assets/icons/011-note.png"};
       title = new String[]{
         "Pesquisa", "Análise", "Resumo"};
       text = new String[]{
@@ -75,7 +75,7 @@ static class Content {
         "assets/icons/001-network.png", 
         "assets/icons/001-network.png", 
         "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/015-medal.png"};
       title = new String[]{
         "Capa", "Introdução", "Desenvolvimento", "Conclusão", "Referências"};
       text = new String[]{
@@ -87,7 +87,7 @@ static class Content {
     } else {
       icon = new String[]{
         "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
+        "assets/icons/017-pie-chart.png", 
         "assets/icons/001-network.png"};
       title = new String[]{
         "Paleta", "Imagens", "Gráficos"};
@@ -107,9 +107,9 @@ static class Content {
     
     if(index == 0){
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/001-network.png",
+        "assets/icons/019-target.png", 
+        "assets/icons/020-notepad.png"};
       title = new String[]{
         "Idéia", "Foco", "Organização"};
       text = new String[]{
@@ -120,20 +120,20 @@ static class Content {
         
     } else if(index == 1){
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/021-picture.png", 
+        "assets/icons/022-file.png", 
+        "assets/icons/023-hands.png"};
       title = new String[]{
-        "Cenário", "Organização", "Harmonia"};
+        "Cenário", "Organização", "Poluição Visual"};
       text = new String[]{
         "Procure um cenário com um bom fundo para gravar. Silencioso, bem iluminado e sem muito movimento.", 
         "Lembre de preparar o cenário antes de gravar. Remover lixo, animais e tudo que não seja útil ao objetivo.", 
         "Menos é mais. Não polua visualmente a cena. Separe cenas com poucos objetos, ao invés de uma com vários.",};
     } else if(index == 2){
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/024-brightness.png", 
+        "assets/icons/025-lamp.png", 
+        "assets/icons/026-window.png"};
       title = new String[]{
         "Iluminação Homogênea", "Iluminação Artificial", "Iluminação Ambiente"};
       text = new String[]{
@@ -142,11 +142,11 @@ static class Content {
         "De frente para a janela é um ótimo local para gravar. A luz natural é balanceada, difusa e homogêna.",};
     } else if(index == 3){
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/027-megaphone.png", 
+        "assets/icons/028-music.png", 
+        "assets/icons/029-headphones.png", 
+        "assets/icons/030-arrows.png", 
+        "assets/icons/031-technology-1.png"};
       title = new String[]{
         "Local barulhento", "Ruído", "Equipamento", "Sincronia", "Celular"};
       text = new String[]{
@@ -157,12 +157,12 @@ static class Content {
         "Use um bom celular para gravar seus áudios. Alguns até mesmo permitem edição via aplicativos."};
     } else if(index == 4){
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/032-technology.png", 
+        "assets/icons/033-video-camera-1.png", 
+        "assets/icons/034-television.png", 
+        "assets/icons/011-note.png"};
       title = new String[]{
-        "Celular", "Estabilidade", "Enquadramento", "Coragem"};
+        "Celular", "Estabilidade", "Enquadramento", "Roteiro"};
       text = new String[]{
         "Use um bom celular para gravar seus vídeos. Cuidado pois alguns escurecem ou distorcem a imagem.", 
         "Mantenha a câmera estável. Para isso, use um tripé improvisado. Não grave hand-cam, pode sair impraticável.", 
@@ -170,9 +170,9 @@ static class Content {
         "Não tenha medo de errar na hora de ler o roteiro. E sempre coloque legenda para o caso de problemas na execução do áudio.",};
     } else {
       icon = new String[]{
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/035-movie.png", 
+        "assets/icons/030-arrows.png", 
+        "assets/icons/036-youtube.png"};
       title = new String[]{
         "Corte Rápido", "Sincronização", "Edição e Divulgação"};
       text = new String[]{
