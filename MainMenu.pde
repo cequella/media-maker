@@ -1,6 +1,6 @@
 class MainMenu extends Screen {
-  final int LOGO_SIZE   = 100;
-  final int LOGO_SPEED  = 5;
+  final int LOGO_SIZE  = 100;
+  final int LOGO_SPEED = 5;
 
   private PImage     m_logo;
   private Card[]     m_card;
@@ -8,8 +8,8 @@ class MainMenu extends Screen {
   private PageViewer m_slide, m_video, m_current;
   private Card       m_currentCard = null;
 
-  private float  m_logoSize;
-  private float  m_logoX, m_logoY;
+  private float m_logoSize;
+  private float m_logoX, m_logoY;
 
   public MainMenu(PApplet t_context) {
     super(t_context, "Home");
@@ -35,12 +35,12 @@ class MainMenu extends Screen {
 
     //Draw page viewer
     if (m_current!=null) m_current.draw();
-    
+
     //Draw Top bar
     m_topBar.draw();
   }
   @Override protected void load(PApplet context) {
-    m_logo = loadImage(StrResource.logo);
+    m_logo = logo;
     m_card = new Card[4];
 
     // Create menu options
@@ -62,22 +62,36 @@ class MainMenu extends Screen {
     }
 
     //Top bar
-    m_topBar = new TopBar(context, Palette.main_light, title());
+    m_topBar = new TopBar(context, Palette.main_light, "MediaMaker");
 
-    //Page Viewer TODO width/height
-    final String[] slideList = new String[3];
-    for (int i=0; i<slideList.length; i++) slideList[i] = "assets/info/slide/slide "+(i+1)+".png";
+    //Page Viewer
     m_slide = new PageViewer(context, 
       width/3.0+10, TopBar.BAR_HEIGHT+10, 
-      530.0-20.0, 340.0-20.0, 
-      slideList);
-
-    final String[] videoList = new String[6];
-    for (int i=0; i<videoList.length; i++) videoList[i] = "assets/info/video/video "+(i+1)+".png";
+      0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0, 
+      this.createSlideList(context));
+      
     m_video = new PageViewer(context, 
       width/3.0+10, TopBar.BAR_HEIGHT+10, 
-      530.0-20.0, 340.0-20.0, 
-      videoList);
+      0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0, 
+      this.createVideoList(context));
+  }
+  ExpandAnimation[] createSlideList(PApplet context){
+    final ExpandAnimation[] slideList = new ExpandAnimation[3];
+    for (int i=0; i<slideList.length; i++){
+      slideList[i] = new ExpandAnimation(context, Content.getSlide(i));
+      if(i==1) slideList[i].horizontal();
+    }
+    
+    return slideList;
+  }
+  ExpandAnimation[] createVideoList(PApplet context){
+    final ExpandAnimation[] videoList = new ExpandAnimation[6];
+    for (int i=0; i<videoList.length; i++){
+      videoList[i] = new ExpandAnimation(context, Content.getSlide(i));
+      videoList[i].horizontal();
+    }
+    
+    return videoList;
   }
   @Override protected void events(PApplet context) {
     cardEvents();
@@ -122,7 +136,6 @@ class MainMenu extends Screen {
         default:
           m_current = null;
         }
-        
       }
     }
   }

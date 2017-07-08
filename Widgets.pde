@@ -271,7 +271,7 @@ class TopBar extends Widget {
   private PImage    m_logo;
   private PImage    m_option;
   private PFont     m_font;
-  private String    m_title[];
+  private String    m_title;
   private color     m_color;
   private FloatMenu m_floatMenu;
 
@@ -282,22 +282,18 @@ class TopBar extends Widget {
   private final static float BAR_HALF_HEIGHT = BAR_HEIGHT/2.0;
   private final static float BAR_TITLE_LEFT  = BAR_HEIGHT+10.0;
 
-  public TopBar(PApplet t_context, color t_color, String t_title[]) {
+  public TopBar(PApplet t_context, color t_color, String t_title) {
     super(t_context, 0, 0, width, BAR_HEIGHT);
     m_color = t_color;
-    m_title = new String[t_title.length];
-    for (int i=0; i<t_title.length; i++) m_title[i] = t_title[i]+">";
+    m_title = t_title;
 
-    m_logo   = loadImage(StrResource.logo);
+    m_logo   = logo;
     m_option = loadImage("assets/icons/006-more.png");
     m_font   = loadFont(StrResource.fontM);
 
     m_floatMenu = new FloatMenu(t_context, 
       width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE, 
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
-  }
-  public TopBar(PApplet t_context, color t_color, String t_title) {
-    this(t_context, t_color, new String[]{t_title});
   }
 
   void draw() {
@@ -314,10 +310,7 @@ class TopBar extends Widget {
     fill(255);
     textFont(m_font);
     textAlign(LEFT, CENTER);
-    for (int i=0; i<m_title.length; i++) {
-      final String s = m_title[i];
-      text(s, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
-    }
+    text(m_title, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
 
     //Draw quit button
     image(m_option, 
@@ -357,46 +350,45 @@ class TopBar extends Widget {
 
 // PageViewer ---------------------------------------------------
 class PageViewer extends Widget {
-  private PImage[] m_content;
-  private PImage   m_previous, m_next;
-  private float[]  m_buttonCoord = new float[4];
-  private float    m_buttonSize = 30.0;
-  private float    m_buttonTopMargin = 20.0;
-  private int      m_current = 0;
+  private ExpandAnimation[] m_content;
+  private PImage            m_previous, m_next;
+  private float[]           m_buttonCoord = new float[4];
+  private float             m_buttonSize = 30.0;
+  private float             m_buttonTopMargin = 20.0;
+  private int               m_current = 0;
 
-  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, String[] path) {
+  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, ExpandAnimation[] t_content) {
     super(t_context, t_x, t_y, t_width, t_height);
 
     m_previous = loadImage("assets/icons/008-back.png");
     m_next = loadImage("assets/icons/007-next.png");
 
-    m_content = new PImage[path.length];
-    for (int i=0; i<path.length; i++) {
-      m_content[i] = loadImage(path[i]);
-    }
+    m_content = t_content;
 
     final float aux = (width()-3.0*m_buttonSize)/2.0;
 
     m_buttonCoord[0] = x()+aux;
-    m_buttonCoord[1] = y()+height()+m_buttonTopMargin;
+    m_buttonCoord[1] = y()+height()-m_buttonSize; // TODO
     m_buttonCoord[2] = x()+aux+2.0*m_buttonSize;
-    m_buttonCoord[3] = y()+height()+m_buttonTopMargin;
+    m_buttonCoord[3] = y()+height()-m_buttonSize; // TODO
 
     bottom(bottom()+m_buttonTopMargin+m_buttonSize);
+
+    for (int i=0; i<m_content.length; i++) {
+      m_content[i].position(x(), y()).dimension(width(), height()-y()-m_buttonSize-20.0);
+    }
   }   
 
   @Override public void draw() {
-    image(m_content[m_current], 
-      x(), y(), 
-      width(), height());
-    
-    if(m_current == 0) tint(150);
+    m_content[m_current].draw();
+
+    if (m_current == 0) tint(150);
     image(m_previous, 
       m_buttonCoord[0], m_buttonCoord[1], 
       m_buttonSize, m_buttonSize);
     noTint();
-    
-    if(m_current == m_content.length-1) tint(150);
+
+    if (m_current == m_content.length-1) tint(150);
     image(m_next, 
       m_buttonCoord[2], m_buttonCoord[3], 
       m_buttonSize, m_buttonSize);
@@ -415,18 +407,28 @@ class PageViewer extends Widget {
     }
   }
   private boolean clickPrevious() {
-    if (context().mouseX < m_buttonCoord[0]) return false;
-    if (context().mouseX > m_buttonCoord[0]+m_buttonSize) return false;
-    if (context().mouseY < m_buttonCoord[1]) return false;
-    if (context().mouseY > m_buttonCoord[1]+m_buttonSize) return false;
+    final float MOUSE_X = context().mouseX;
+    final float MOUSE_Y = context().mouseY;
+
+    if (MOUSE_X < m_buttonCoord[0]) return false;
+    if (MOUSE_X > m_buttonCoord[0]+m_buttonSize) return false;
+    if (MOUSE_Y < m_buttonCoord[1]) return false;
+    if (MOUSE_Y > m_buttonCoord[1]+m_buttonSize) return false;
+
+    if (VERBOSITY) println("Previous clicked!");
 
     return true;
   }
   private boolean clickNext() {
-    if (context().mouseX < m_buttonCoord[2]) return false;
-    if (context().mouseX > m_buttonCoord[2]+m_buttonSize) return false;
-    if (context().mouseY < m_buttonCoord[3]) return false;
-    if (context().mouseY > m_buttonCoord[3]+m_buttonSize) return false;
+    final int MOUSE_X = context().mouseX;
+    final int MOUSE_Y = context().mouseY;
+
+    if (MOUSE_X < m_buttonCoord[2]) return false;
+    if (MOUSE_X > m_buttonCoord[2]+m_buttonSize) return false;
+    if (MOUSE_Y < m_buttonCoord[3]) return false;
+    if (MOUSE_Y > m_buttonCoord[3]+m_buttonSize) return false;
+
+    if (VERBOSITY) println("Next clicked!");
 
     return true;
   }

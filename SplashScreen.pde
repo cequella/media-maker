@@ -35,7 +35,7 @@ class SplashScreen extends Screen {
   }
 
   @Override void load(PApplet context) {
-    m_logo = loadImage(StrResource.logo);
+    m_logo = logo;
     m_font = loadFont(StrResource.fontB);
   }
 

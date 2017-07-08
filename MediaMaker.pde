@@ -13,6 +13,7 @@ void settings() {
   }
   //fullScreen();
 
+  logo = loadImage(StrResource.logo);
   screenManager = new ScreenManager(this);
 }
 
