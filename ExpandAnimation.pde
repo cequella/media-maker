@@ -8,6 +8,7 @@ class ExpandAnimation {
   private int      m_size = 50;
   private float    m_x, m_y, m_width, m_height;
   private boolean  m_vertical = true;
+  private color    m_tint = Palette.accent_dark;
   
   ExpandAnimation(PApplet context, Content content){
     m_context = context;
@@ -39,6 +40,10 @@ class ExpandAnimation {
     m_vertical = false;
     return this;
   }
+  ExpandAnimation tint(color t_tint){
+    m_tint = t_tint;
+    return this;
+  }
   
   void draw(){
     if(m_vertical){
@@ -62,7 +67,7 @@ class ExpandAnimation {
       // Content
       PImage current = m_imageList[i];
       m_context.pushStyle();
-      m_context.tint(Palette.accent_dark);
+      if(m_tint!=0) m_context.tint(m_tint);
       m_context.image(current, m_x+ i*a +b +10, m_y+10, m_size, m_size);
       
       m_context.fill(Palette.accent);
@@ -87,7 +92,7 @@ class ExpandAnimation {
       // Content
       PImage current = m_imageList[i];
       m_context.pushStyle();
-      m_context.tint(Palette.accent_dark);
+      if(m_tint!=0) m_context.tint(m_tint);
       m_context.image(current, m_x +30, m_y+ i*(a+10)+b, m_size, m_size);
       
       m_context.fill(Palette.accent);

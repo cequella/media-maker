@@ -5,7 +5,7 @@ class MainMenu extends Screen {
   private PImage     m_logo;
   private Card[]     m_card;
   private TopBar     m_topBar;
-  private PageViewer m_slide, m_video, m_current;
+  private PageViewer m_slide, m_video, m_aboutEquip, m_current;
   private Card       m_currentCard = null;
 
   private float m_logoSize;
@@ -28,7 +28,7 @@ class MainMenu extends Screen {
         m_logoX += LOGO_SPEED;
         return;
       }
-      
+
       m_topBar.setSubtitle(null);
     }
 
@@ -71,14 +71,17 @@ class MainMenu extends Screen {
     //Page Viewer
     float[] dimen = {width/3.0+10, TopBar.BAR_HEIGHT+10, 0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0};
     m_slide = new PageViewer(context, 
-      dimen,
-      m_topBar,
+      dimen, 
+      m_topBar, 
       this.createSlideList(context));
-
     m_video = new PageViewer(context, 
-      dimen,
-      m_topBar,
+      dimen, 
+      m_topBar, 
       this.createVideoList(context));
+    m_aboutEquip = new PageViewer(context, 
+      dimen, 
+      m_topBar, 
+      this.createEquipList(context));
   }
   ExpandAnimation[] createSlideList(PApplet context) {
     final ExpandAnimation[] slideList = new ExpandAnimation[3];
@@ -98,6 +101,13 @@ class MainMenu extends Screen {
     }
 
     return videoList;
+  }
+  ExpandAnimation[] createEquipList(PApplet context) {
+    final ExpandAnimation[] equipList = new ExpandAnimation[1];
+    equipList[0] = new ExpandAnimation(context, Content.getEquip());
+    equipList[0].horizontal().tint(0);
+
+    return equipList;
   }
   @Override protected void events(PApplet context) {
     cardEvents();
@@ -138,6 +148,9 @@ class MainMenu extends Screen {
           break;
         case 1:
           m_current = m_slide;
+          break;
+        case 2:
+          m_current = m_aboutEquip;
           break;
         default:
           m_current = null;

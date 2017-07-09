@@ -296,7 +296,7 @@ class TopBar extends Widget {
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
 
-  void setSubtitle(String t_subtitle){
+  void setSubtitle(String t_subtitle) {
     m_subtitle = t_subtitle;
   }
 
@@ -314,7 +314,7 @@ class TopBar extends Widget {
     fill(255);
     textFont(m_font);
     textAlign(LEFT, CENTER);
-    if(m_subtitle==null){
+    if (m_subtitle==null) {
       text(m_title, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
     } else {
       text(m_title+" > "+m_subtitle, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
@@ -324,7 +324,7 @@ class TopBar extends Widget {
     image(m_option, 
       width-OPTION_SIZE-LOGO_PADDING, LOGO_PADDING, 
       OPTION_SIZE, OPTION_SIZE);
-      
+
     checkClick();
     updateState();
 
@@ -336,8 +336,8 @@ class TopBar extends Widget {
   private void checkClick() {
     if (clicked()) {
       if (clickOption()) {
-       m_floatMenu.show();
-      } else  {
+        m_floatMenu.show();
+      } else {
         m_floatMenu.hide();
       }
     }
@@ -369,7 +369,7 @@ class PageViewer extends Widget {
 
   public PageViewer(PApplet t_context, float[] t_dimen, TopBar t_topBar, ExpandAnimation[] t_content) {
     super(t_context, t_dimen[0], t_dimen[1], t_dimen[2], t_dimen[3]);
-    
+
     m_topBar = t_topBar;
     m_previous = loadImage("assets/icons/008-back.png");
     m_next = loadImage("assets/icons/007-next.png");
@@ -394,20 +394,22 @@ class PageViewer extends Widget {
     m_content[m_current].draw();
     m_topBar.setSubtitle(m_content[m_current].subtitle());
 
-    if (m_current == 0) tint(150);
-    image(m_previous, 
-      m_buttonCoord[0], m_buttonCoord[1], 
-      m_buttonSize, m_buttonSize);
-    noTint();
+    if (m_content.length > 1) {
+      if (m_current == 0) tint(150);
+      image(m_previous, 
+        m_buttonCoord[0], m_buttonCoord[1], 
+        m_buttonSize, m_buttonSize);
+      noTint();
 
-    if (m_current == m_content.length-1) tint(150);
-    image(m_next, 
-      m_buttonCoord[2], m_buttonCoord[3], 
-      m_buttonSize, m_buttonSize);
-    noTint();
+      if (m_current == m_content.length-1) tint(150);
+      image(m_next, 
+        m_buttonCoord[2], m_buttonCoord[3], 
+        m_buttonSize, m_buttonSize);
+      noTint();
 
-    checkClick();
-    updateState();
+      checkClick();
+      updateState();
+    }
   }
   private void checkClick() {
     if (clicked()) {

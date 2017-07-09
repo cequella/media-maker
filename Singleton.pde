@@ -84,13 +84,13 @@ static class Content {
       title = new String[]{
         "Capa", "Introdução", "Desenvolvimento", "Conclusão", "Referências"};
       text = new String[]{
-        "Onde devem ficar informações básicas como nome de equipe e projeto. Seja minimalista.", 
+        "Onde devem ficar informações básicas como nome de equipe e projeto. Seja sucinto.", 
         "Explicação dos objetivos, materiais e programa utilizados. Importante para embasar o projeto.", 
         "Conteúdo propriamente dito. Apresente o máximo possível de imagens, com texto curtos pontuais.", 
         "Espaço destinado a apresentar o que foi aprendido e os resultados obtidos.", 
         "Alguns trabalhos exigem apresentação das referências. Dedique esse espaço às fontes de pesquisa."};
     } else {
-      subtitle = "Aplicação de cores e imagens";
+      subtitle = "Aplicação de Cores e Imagens";
       icon = new String[]{
         "assets/icons/001-network.png", 
         "assets/icons/017-pie-chart.png", 
@@ -100,22 +100,22 @@ static class Content {
       text = new String[]{
         "Utilize cores agradáveis, elas são muito importante para quem for assistir sua apresentação. Existe sites que montam paletas e até temas para você.", 
         "Priorize imagens com tamanho e resolução altos. Isso minimiza, ou até mesmo evita, perca de qualidade gráfica.", 
-        "Cada formato de gráfico tem uma utilidade, certifique-se de usar o que melhor apresente suas informações.",};
+        "Cada formato de gráfico tem uma utilidade, certifique-se de usar o que melhor apresente suas informações.", };
     }
 
     return new Content(subtitle, icon, title, text);
   }
-  
+
   public static Content getVideo(int index) {
     String   subtitle = null;
     String[] icon  = null;
     String[] title = null;
     String[] text  = null;
-    
-    if(index == 0){
+
+    if (index == 0) {
       subtitle = "Transformando Idéia em Roteiro";
       icon = new String[]{
-        "assets/icons/001-network.png",
+        "assets/icons/001-network.png", 
         "assets/icons/019-target.png", 
         "assets/icons/020-notepad.png"};
       title = new String[]{
@@ -123,8 +123,8 @@ static class Content {
       text = new String[]{
         "Elabore brainstorms até surigr uma ideia. Então crie tópicos para lhe guiar.", 
         "Não seja prolixo. Não perca tempo explicando coisas não importantes. Cada segundo vale muito.", 
-        "Teste seu roteiro, repasse suas falas, meça o tempo... Não tenha medo de reescrever o roteiro.",};
-    } else if(index == 1){
+        "Teste seu roteiro, repasse suas falas, meça o tempo... Não tenha medo de reescrever o roteiro.", };
+    } else if (index == 1) {
       subtitle = "Preparando o Cenário";
       icon = new String[]{
         "assets/icons/021-picture.png", 
@@ -135,8 +135,8 @@ static class Content {
       text = new String[]{
         "Procure um cenário com um bom fundo para gravar. Silencioso, bem iluminado e sem muito movimento.", 
         "Lembre de preparar o cenário antes de gravar. Remover lixo, animais e tudo que não seja útil ao objetivo.", 
-        "Menos é mais. Não polua visualmente a cena. Separe cenas com poucos objetos, ao invés de uma com vários.",};
-    } else if(index == 2){
+        "Menos é mais. Não polua visualmente a cena. Separe cenas com poucos objetos, ao invés de uma com vários.", };
+    } else if (index == 2) {
       subtitle = "Iluminando seu Vídeo";
       icon = new String[]{
         "assets/icons/024-brightness.png", 
@@ -147,8 +147,8 @@ static class Content {
       text = new String[]{
         "Mantenha o padrão de iluminação bom em todo o vídeo. Nada de 'cena clara' e 'cena escura'.", 
         "Em locais fechados, teste posição para luz artificial. Procure sobre 'iluminação de 3 pontos' e 'iluminação difusa'.", 
-        "De frente para a janela é um ótimo local para gravar. A luz natural é balanceada, difusa e homogêna.",};
-    } else if(index == 3){
+        "De frente para a janela é um ótimo local para gravar. A luz natural é balanceada, difusa e homogêna.", };
+    } else if (index == 3) {
       subtitle = "A Importância do Som";
       icon = new String[]{
         "assets/icons/027-megaphone.png", 
@@ -161,10 +161,10 @@ static class Content {
       text = new String[]{
         "Não grave em ambientes barulhentos. Procure sempre o mais silencioso possível.", 
         "Alguns ruídos só são ouvidos na gravação (ventilador, vento, sopro de fala), tente evitá-los.", 
-        "Manter headsets e microfones são essenciais. Mas nada que um bom celular não faça.",
-        "Gravar áudio separado ajuda na edição. Uma 'palma' pode ser o suficiente para você sincronizá-los depois.",
+        "Manter headsets e microfones são essenciais. Mas nada que um bom celular não faça.", 
+        "Gravar áudio separado ajuda na edição. Uma 'palma' pode ser o suficiente para você sincronizá-los depois.", 
         "Use um bom celular para gravar seus áudios. Alguns até mesmo permitem edição via aplicativos."};
-    } else if(index == 4){
+    } else if (index == 4) {
       subtitle = "A Arte da Filmagem";
       icon = new String[]{
         "assets/icons/032-technology.png", 
@@ -176,8 +176,8 @@ static class Content {
       text = new String[]{
         "Use um bom celular para gravar seus vídeos. Cuidado pois alguns escurecem ou distorcem a imagem.", 
         "Mantenha a câmera estável. Para isso, use um tripé improvisado. Não grave hand-cam, pode sair impraticável.", 
-        "Procure enquadrar bem (objeto ou pessoa), centralizado e com 'margens de respiro' para evitar poluição visual.",
-        "Não tenha medo de errar na hora de ler o roteiro. E sempre coloque legenda para o caso de problemas na execução do áudio.",};
+        "Procure enquadrar bem (objeto ou pessoa), centralizado e com 'margens de respiro' para evitar poluição visual.", 
+        "Não tenha medo de errar na hora de ler o roteiro. E sempre coloque legenda para o caso de problemas na execução do áudio.", };
     } else {
       subtitle = "A Mágica da Edição";
       icon = new String[]{
@@ -189,9 +189,60 @@ static class Content {
       text = new String[]{
         "Assista seu vídeo e corte partes ociosas. Mantenha o vídeo mais dinâmico e curto.", 
         "Sincronize o áudio (esse também deve ser cortado). Muito cuidado nessa parte, é onde os erros ficam mais evidentes.", 
-        "Busque programas de edição que facilitem seu trabalho. E divulgue o material num meio válido para seu público.",};
+        "Busque programas de edição que facilitem seu trabalho. E divulgue o material num meio válido para seu público.", };
     }
-    
+
+    return new Content(subtitle, icon, title, text);
+  }
+
+  public static Content getEquip() {
+    String   subtitle = null;
+    String[] icon  = null;
+    String[] title = null;
+    String[] text  = null;
+
+    subtitle = "Sobre a Equipe";
+    icon = new String[]{
+      "assets/icons/photo/cequella.jpg", 
+      "assets/icons/photo/bruna.jpg", 
+      "assets/icons/photo/joao.jpg", 
+      "assets/icons/photo/lana.jpg", 
+      "assets/icons/photo/michael.jpg", 
+    };
+    title = new String[]{
+      "Pedro Oliveira", "Maria Bruna", "João Vitor", "Lana Campelo", "Michael Dhyani"};
+    text = new String[]{
+      "Representante da equipe e programador", 
+      "Adminstradora do blog e beta-tester", 
+      "Arquiteto da informação", 
+      "Designer", 
+      "Roteirista",};
+
+    return new Content(subtitle, icon, title, text);
+  }
+  public static Content getProject() {
+    String   subtitle = null;
+    String[] icon  = null;
+    String[] title = null;
+    String[] text  = null;
+
+    subtitle = "Sobre o Projeto";
+    icon = new String[]{
+      "assets/icons/photo/smd.png", 
+      "assets/icons/photo/diatec.png", 
+      "assets/icons/photo/celly.jpg", 
+      "assets/icons/photo/antonio.jpg", 
+    };
+    title = new String[]{
+      "SMD - UFC", "DIATEC - UFC", "Cely Martins", "Antonio Paulo"};
+    text = new String[]{
+      "Curso de Sistemas e Mídias Digitais (Unviersidade Virtual). Com ajuda dos profesores: "+
+      "José Aires e Raquel Santiago (Cognição), Glaudiney (Narrativas), Paula Marques (Comunicação Visual) e "+
+      "Ricardo Brauner(Programação II)", 
+      "Departamento de Integração Acadêmica e Tecnológica da UFC (Centro de Tecnologia)", 
+      "Cliente", 
+      "Cliente",};
+
     return new Content(subtitle, icon, title, text);
   }
 }
