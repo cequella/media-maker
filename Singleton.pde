@@ -236,7 +236,7 @@ static class Content {
     title = new String[]{
       "SMD - UFC", "DIATEC - UFC", "Cely Martins", "Antonio Paulo"};
     text = new String[]{
-      "Curso de Sistemas e Mídias Digitais (Unviersidade Virtual). Com ajuda dos profesores: "+
+      "Curso de Sistemas e Mídias Digitais (Universidade Virtual). Com ajuda dos profesores: "+
       "José Aires e Raquel Santiago (Cognição), Glaudiney (Narrativas), Paula Marques (Comunicação Visual) e "+
       "Ricardo Brauner(Programação II)", 
       "Departamento de Integração Acadêmica e Tecnológica da UFC (Centro de Tecnologia)", 

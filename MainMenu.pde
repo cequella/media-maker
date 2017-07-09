@@ -5,7 +5,7 @@ class MainMenu extends Screen {
   private PImage     m_logo;
   private Card[]     m_card;
   private TopBar     m_topBar;
-  private PageViewer m_slide, m_video, m_aboutEquip, m_current;
+  private PageViewer m_slide, m_video, m_aboutEquip, m_aboutProject, m_current;
   private Card       m_currentCard = null;
 
   private float m_logoSize;
@@ -66,7 +66,7 @@ class MainMenu extends Screen {
     }
 
     //Top bar
-    m_topBar = new TopBar(context, Palette.main_light, "MediaMaker");
+    m_topBar = new TopBar(context, this, Palette.main_light, "MediaMaker");
 
     //Page Viewer
     float[] dimen = {width/3.0+10, TopBar.BAR_HEIGHT+10, 0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0};
@@ -82,6 +82,10 @@ class MainMenu extends Screen {
       dimen, 
       m_topBar, 
       this.createEquipList(context));
+    m_aboutProject = new PageViewer(context, 
+      dimen, 
+      m_topBar, 
+      this.createProjectList(context));
   }
   ExpandAnimation[] createSlideList(PApplet context) {
     final ExpandAnimation[] slideList = new ExpandAnimation[3];
@@ -109,6 +113,13 @@ class MainMenu extends Screen {
 
     return equipList;
   }
+  ExpandAnimation[] createProjectList(PApplet context) {
+    final ExpandAnimation[] projectList = new ExpandAnimation[1];
+    projectList[0] = new ExpandAnimation(context, Content.getProject());
+    projectList[0].horizontal().tint(0);
+
+    return projectList;
+  }
   @Override protected void events(PApplet context) {
     cardEvents();
   }
@@ -124,7 +135,12 @@ class MainMenu extends Screen {
     m_currentCard = card;
     card.setForeground(255).setBackground(Palette.main).iconSize(55.0);
   }
-
+  private void aboutEquip(){
+    m_current = m_aboutEquip;
+  }
+  private void aboutProject(){
+    m_current = m_aboutProject;
+  }
   private void cardEvents() {
     if (m_card == null) return;
 
@@ -148,9 +164,6 @@ class MainMenu extends Screen {
           break;
         case 1:
           m_current = m_slide;
-          break;
-        case 2:
-          m_current = m_aboutEquip;
           break;
         default:
           m_current = null;

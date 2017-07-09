@@ -56,6 +56,9 @@ class ExpandAnimation {
   String subtitle(){
     return m_subtitle;
   }
+  PApplet context(){
+    return m_context;
+  }
   void verticalDraw(){
     float a = m_width/float(m_imageList.length);
     float b = (a-m_size)/2.0;

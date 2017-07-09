@@ -9,11 +9,13 @@ class FloatMenu {
   private String[] m_content;
   private float    m_biggestItem = -1.0;
   private boolean  m_visible = false;
+  private MainMenu m_mainMenu;
 
   private int m_current = -1;
 
-  public FloatMenu(PApplet t_context, float t_x, float t_y, String[] t_content) {
+  public FloatMenu(PApplet t_context, MainMenu t_mainMenu, float t_x, float t_y, String[] t_content) {
     m_context = t_context;
+    m_mainMenu = t_mainMenu;
     m_x = t_x;
     m_y = t_y;
     m_content = t_content;
@@ -62,14 +64,16 @@ class FloatMenu {
     return m_visible;
   }
 
-  private void checkState() {
+  public void checkState(){
     if (m_current < 0) return;
 
     if (m_context.mousePressed) {
       switch(m_current) {
       case 0:
+        m_mainMenu.aboutEquip();
         break;
       case 1:
+        m_mainMenu.aboutProject();
         break;
       case 2:
         break;
@@ -77,11 +81,13 @@ class FloatMenu {
         exit();
         break;
       }
+      
+      this.hide();
     }
   }
   private void update() {
-    final int MOUSE_X = m_context.mouseX;
-    final int MOUSE_Y = m_context.mouseY;
+    final int   MOUSE_X = m_context.mouseX;
+    final int   MOUSE_Y = m_context.mouseY;
     final float TOP_MARGIN = m_y+m_marginV;
 
     if (MOUSE_X>m_x && MOUSE_X<m_x+m_biggestItem+2*m_marginH) {

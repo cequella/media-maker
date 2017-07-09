@@ -282,7 +282,7 @@ class TopBar extends Widget {
   private final static float BAR_HALF_HEIGHT = BAR_HEIGHT/2.0;
   private final static float BAR_TITLE_LEFT  = BAR_HEIGHT+10.0;
 
-  public TopBar(PApplet t_context, color t_color, String t_title) {
+  public TopBar(PApplet t_context, MainMenu t_mainMenu, color t_color, String t_title) {
     super(t_context, 0, 0, width, BAR_HEIGHT);
     m_color = t_color;
     m_title = t_title;
@@ -291,7 +291,7 @@ class TopBar extends Widget {
     m_option = loadImage("assets/icons/006-more.png");
     m_font   = loadFont(StrResource.fontM);
 
-    m_floatMenu = new FloatMenu(t_context, 
+    m_floatMenu = new FloatMenu(t_context, t_mainMenu,
       width-1.5*OPTION_SIZE-LOGO_PADDING, OPTION_SIZE, 
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
