@@ -4,6 +4,7 @@ class ExpandAnimation {
   private PImage[] m_imageList;
   private String[] m_textList;
   private String[] m_titleList;
+  private String   m_subtitle;
   private int      m_size = 50;
   private float    m_x, m_y, m_width, m_height;
   private boolean  m_vertical = true;
@@ -17,6 +18,7 @@ class ExpandAnimation {
     }
     m_textList = content.text;
     m_titleList = content.title;
+    m_subtitle = content.subtitle;
   }
   
   ExpandAnimation position(float t_x, float t_y){
@@ -44,6 +46,10 @@ class ExpandAnimation {
     } else {
       horizontalDraw();
     }
+  }
+  
+  String subtitle(){
+    return m_subtitle;
   }
   void verticalDraw(){
     float a = m_width/float(m_imageList.length);

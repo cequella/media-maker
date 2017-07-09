@@ -22,12 +22,14 @@ class MainMenu extends Screen {
   }
   @Override protected void ready(PApplet context) {
     // Draw Logo
-    if(m_current==null){
+    if (m_current==null) {
       image(m_logo, m_logoX, m_logoY, m_logoSize, m_logoSize);
       if (m_logoX < (4.0*width-3.0*LOGO_SIZE)/6.0) {
         m_logoX += LOGO_SPEED;
         return;
       }
+      
+      m_topBar.setSubtitle(null);
     }
 
     // Draw Icons
@@ -67,33 +69,34 @@ class MainMenu extends Screen {
     m_topBar = new TopBar(context, Palette.main_light, "MediaMaker");
 
     //Page Viewer
+    float[] dimen = {width/3.0+10, TopBar.BAR_HEIGHT+10, 0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0};
     m_slide = new PageViewer(context, 
-      width/3.0+10, TopBar.BAR_HEIGHT+10, 
-      0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0, 
+      dimen,
+      m_topBar,
       this.createSlideList(context));
-      
+
     m_video = new PageViewer(context, 
-      width/3.0+10, TopBar.BAR_HEIGHT+10, 
-      0.66*width-20.0, height-TopBar.BAR_HEIGHT-10.0-20.0, 
+      dimen,
+      m_topBar,
       this.createVideoList(context));
   }
-  ExpandAnimation[] createSlideList(PApplet context){
+  ExpandAnimation[] createSlideList(PApplet context) {
     final ExpandAnimation[] slideList = new ExpandAnimation[3];
-    for (int i=0; i<slideList.length; i++){
+    for (int i=0; i<slideList.length; i++) {
       slideList[i] = new ExpandAnimation(context, Content.getSlide(i));
-      if(i==1) slideList[i].horizontal();
+      if (i==1) slideList[i].horizontal();
     }
-    
+
     return slideList;
   }
-  ExpandAnimation[] createVideoList(PApplet context){
+  ExpandAnimation[] createVideoList(PApplet context) {
     final ExpandAnimation[] videoList = new ExpandAnimation[6];
-    for (int i=0; i<videoList.length; i++){
+    for (int i=0; i<videoList.length; i++) {
       videoList[i] = new ExpandAnimation(context, Content.getVideo(i));
-      
-      if(i == 3 || i == 4) videoList[i].horizontal();
+
+      if (i == 3 || i == 4) videoList[i].horizontal();
     }
-    
+
     return videoList;
   }
   @Override protected void events(PApplet context) {

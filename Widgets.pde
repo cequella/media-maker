@@ -271,7 +271,7 @@ class TopBar extends Widget {
   private PImage    m_logo;
   private PImage    m_option;
   private PFont     m_font;
-  private String    m_title;
+  private String    m_title, m_subtitle;
   private color     m_color;
   private FloatMenu m_floatMenu;
 
@@ -296,6 +296,10 @@ class TopBar extends Widget {
       new String[]{"Sobre o Projeto", "Sobre a Equipe", "Créditos", "Sair"});
   }
 
+  void setSubtitle(String t_subtitle){
+    m_subtitle = t_subtitle;
+  }
+
   void draw() {
     // Draw Bar
     fill(m_color);
@@ -310,7 +314,11 @@ class TopBar extends Widget {
     fill(255);
     textFont(m_font);
     textAlign(LEFT, CENTER);
-    text(m_title, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
+    if(m_subtitle==null){
+      text(m_title, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
+    } else {
+      text(m_title+" > "+m_subtitle, BAR_TITLE_LEFT, BAR_HALF_HEIGHT);
+    }
 
     //Draw quit button
     image(m_option, 
@@ -357,10 +365,12 @@ class PageViewer extends Widget {
   private float             m_buttonSize = 30.0;
   private float             m_buttonTopMargin = 20.0;
   private int               m_current = 0;
+  private TopBar            m_topBar;
 
-  public PageViewer(PApplet t_context, float t_x, float t_y, float t_width, float t_height, ExpandAnimation[] t_content) {
-    super(t_context, t_x, t_y, t_width, t_height);
-
+  public PageViewer(PApplet t_context, float[] t_dimen, TopBar t_topBar, ExpandAnimation[] t_content) {
+    super(t_context, t_dimen[0], t_dimen[1], t_dimen[2], t_dimen[3]);
+    
+    m_topBar = t_topBar;
     m_previous = loadImage("assets/icons/008-back.png");
     m_next = loadImage("assets/icons/007-next.png");
 
@@ -382,6 +392,7 @@ class PageViewer extends Widget {
 
   @Override public void draw() {
     m_content[m_current].draw();
+    m_topBar.setSubtitle(m_content[m_current].subtitle());
 
     if (m_current == 0) tint(150);
     image(m_previous, 

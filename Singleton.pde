@@ -46,19 +46,23 @@ static class Content {
   private String[] icon;
   private String[] title;
   private String[] text;
+  private String   subtitle;
 
-  public Content(String[] icon, String[] title, String[] text) {
+  public Content(String subtitle, String[] icon, String[] title, String[] text) {
+    this.subtitle = subtitle;
     this.icon = icon;
     this.title = title;
     this.text = text;
   }
 
   public static Content getSlide(int index) {
+    String   subtitle = null;
     String[] icon  = null;
     String[] title = null;
     String[] text  = null;
 
     if (index == 0) {
+      subtitle = "Roteirização da Apresentação";
       icon = new String[]{
         "assets/icons/009-search.png", 
         "assets/icons/010-bar-chart.png", 
@@ -70,6 +74,7 @@ static class Content {
         "Comprar informações e orgarnizá-las em formato de tópicos.", 
         "Escrever o básico que será descrito ao longo do trabalho."};
     } else if (index == 1) {
+      subtitle = "Montando a Apresentação";
       icon = new String[]{
         "assets/icons/001-network.png", 
         "assets/icons/001-network.png", 
@@ -85,6 +90,7 @@ static class Content {
         "Espaço destinado a apresentar o que foi aprendido e os resultados obtidos.", 
         "Alguns trabalhos exigem apresentação das referências. Dedique esse espaço às fontes de pesquisa."};
     } else {
+      subtitle = "Aplicação de cores e imagens";
       icon = new String[]{
         "assets/icons/001-network.png", 
         "assets/icons/017-pie-chart.png", 
@@ -97,15 +103,17 @@ static class Content {
         "Cada formato de gráfico tem uma utilidade, certifique-se de usar o que melhor apresente suas informações.",};
     }
 
-    return new Content(icon, title, text);
+    return new Content(subtitle, icon, title, text);
   }
   
   public static Content getVideo(int index) {
+    String   subtitle = null;
     String[] icon  = null;
     String[] title = null;
     String[] text  = null;
     
     if(index == 0){
+      subtitle = "Transformando Idéia em Roteiro";
       icon = new String[]{
         "assets/icons/001-network.png",
         "assets/icons/019-target.png", 
@@ -116,9 +124,8 @@ static class Content {
         "Elabore brainstorms até surigr uma ideia. Então crie tópicos para lhe guiar.", 
         "Não seja prolixo. Não perca tempo explicando coisas não importantes. Cada segundo vale muito.", 
         "Teste seu roteiro, repasse suas falas, meça o tempo... Não tenha medo de reescrever o roteiro.",};
-        
-        
     } else if(index == 1){
+      subtitle = "Preparando o Cenário";
       icon = new String[]{
         "assets/icons/021-picture.png", 
         "assets/icons/022-file.png", 
@@ -130,6 +137,7 @@ static class Content {
         "Lembre de preparar o cenário antes de gravar. Remover lixo, animais e tudo que não seja útil ao objetivo.", 
         "Menos é mais. Não polua visualmente a cena. Separe cenas com poucos objetos, ao invés de uma com vários.",};
     } else if(index == 2){
+      subtitle = "Iluminando seu Vídeo";
       icon = new String[]{
         "assets/icons/024-brightness.png", 
         "assets/icons/025-lamp.png", 
@@ -141,6 +149,7 @@ static class Content {
         "Em locais fechados, teste posição para luz artificial. Procure sobre 'iluminação de 3 pontos' e 'iluminação difusa'.", 
         "De frente para a janela é um ótimo local para gravar. A luz natural é balanceada, difusa e homogêna.",};
     } else if(index == 3){
+      subtitle = "A Importância do Som";
       icon = new String[]{
         "assets/icons/027-megaphone.png", 
         "assets/icons/028-music.png", 
@@ -156,6 +165,7 @@ static class Content {
         "Gravar áudio separado ajuda na edição. Uma 'palma' pode ser o suficiente para você sincronizá-los depois.",
         "Use um bom celular para gravar seus áudios. Alguns até mesmo permitem edição via aplicativos."};
     } else if(index == 4){
+      subtitle = "A Arte da Filmagem";
       icon = new String[]{
         "assets/icons/032-technology.png", 
         "assets/icons/033-video-camera-1.png", 
@@ -169,6 +179,7 @@ static class Content {
         "Procure enquadrar bem (objeto ou pessoa), centralizado e com 'margens de respiro' para evitar poluição visual.",
         "Não tenha medo de errar na hora de ler o roteiro. E sempre coloque legenda para o caso de problemas na execução do áudio.",};
     } else {
+      subtitle = "A Mágica da Edição";
       icon = new String[]{
         "assets/icons/035-movie.png", 
         "assets/icons/030-arrows.png", 
@@ -181,6 +192,6 @@ static class Content {
         "Busque programas de edição que facilitem seu trabalho. E divulgue o material num meio válido para seu público.",};
     }
     
-    return new Content(icon, title, text);
+    return new Content(subtitle, icon, title, text);
   }
 }
