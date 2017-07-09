@@ -411,6 +411,9 @@ class PageViewer extends Widget {
       updateState();
     }
   }
+  public void reset(){
+    m_current = 0;
+  }
   private void checkClick() {
     if (clicked()) {
       if (clickPrevious() && m_current > 0) {

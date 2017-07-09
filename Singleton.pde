@@ -76,10 +76,10 @@ static class Content {
     } else if (index == 1) {
       subtitle = "Montando a Apresentação";
       icon = new String[]{
+        "assets/icons/012-bookmark.png", 
         "assets/icons/001-network.png", 
         "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
-        "assets/icons/001-network.png", 
+        "assets/icons/014-conclusion.png", 
         "assets/icons/015-medal.png"};
       title = new String[]{
         "Capa", "Introdução", "Desenvolvimento", "Conclusão", "Referências"};
@@ -92,9 +92,9 @@ static class Content {
     } else {
       subtitle = "Aplicação de Cores e Imagens";
       icon = new String[]{
-        "assets/icons/001-network.png", 
+        "assets/icons/016-palette.png", 
         "assets/icons/017-pie-chart.png", 
-        "assets/icons/001-network.png"};
+        "assets/icons/037-analytics.png"};
       title = new String[]{
         "Paleta", "Imagens", "Gráficos"};
       text = new String[]{
@@ -115,7 +115,7 @@ static class Content {
     if (index == 0) {
       subtitle = "Transformando Idéia em Roteiro";
       icon = new String[]{
-        "assets/icons/001-network.png", 
+        "assets/icons/018-idea.png", 
         "assets/icons/019-target.png", 
         "assets/icons/020-notepad.png"};
       title = new String[]{

@@ -155,6 +155,8 @@ class MainMenu extends Screen {
       }
 
       if (card.clicked()) {
+        if(m_current!=null) m_current.reset();
+        
         if (VERBOSITY) println("Card \'"+card.label()+"\' clicked");
         selectCard(card);
 
