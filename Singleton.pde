@@ -221,8 +221,8 @@ static class Content {
       "Representante da equipe e programador", 
       "Adminstradora do blog e beta-tester", 
       "Arquiteto da informação", 
-      "Designer", 
-      "Roteirista",};
+      "Designer               ",   //HEUHEUEHUEHUEHEU
+      "Roteirista             ",}; //HEUHEUEHUEHUEHEU
 
     return new Content(subtitle, icon, title, text);
   }
@@ -233,6 +233,27 @@ static class Content {
     String[] text  = null;
 
     subtitle = "Sobre o Projeto";
+    icon = new String[]{
+      "assets/Logo_big.png",
+    };
+    title = new String[]{
+      "MediaMaker"};
+    text = new String[]{
+      "Nosso projeto deste semestre está sendo feito em parceria da professora Cely Martins Santos de Alencar membro do Departamento de Integração Acadêmica e Tecnológica, "+
+      "a qual nos solicitou ajuda para desenvolvermos uma solução para os alunos do curso de engenharia civil pudessem adquirir conhecimento no processo de organizar, "+
+      "desenvolver e divulgar mídias acerca dos projetos desenvolvidos no curso. Tendo isso em vista, nossa solução consiste em uma plataforma onde estão agrupadas, por "+
+      "tópicos, informações básicas baseadas em casos de sucesso que orientarão o usuário. Através de infográficos dinâmicos, os tutorias interativos, usarão em cada "+
+      "tópico uma apresentação no modelo de passo-a-passo para guiar o usuário no desenvolvimento de sua mídia explicativa, seja ela em vídeo ou slide.",};
+
+    return new Content(subtitle, icon, title, text);
+  }
+  public static Content credits() {
+    String   subtitle = null;
+    String[] icon  = null;
+    String[] title = null;
+    String[] text  = null;
+
+    subtitle = "Créditos";
     icon = new String[]{
       "assets/icons/photo/smd.png", 
       "assets/icons/photo/diatec.png", 
@@ -246,8 +267,8 @@ static class Content {
       "José Aires e Raquel Santiago (Cognição), Glaudiney (Narrativas), Paula Marques (Comunicação Visual) e "+
       "Ricardo Brauner(Programação II)", 
       "Departamento de Integração Acadêmica e Tecnológica da UFC (Centro de Tecnologia)", 
-      "Cliente", 
-      "Cliente",};
+      "Cliente         ",   //ISSO SIM XD HEUHEUEHUEHUEHEU
+      "Cliente         ",}; //ISSO SIM XD HEUHEUEHUEHUEHEU
 
     return new Content(subtitle, icon, title, text);
   }

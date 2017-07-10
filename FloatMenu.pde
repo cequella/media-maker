@@ -111,6 +111,7 @@ class FloatMenu {
         m_mainMenu.aboutEquip();
         break;
       case 2:
+        m_mainMenu.credits();
         break;
       case 3:
         exit();

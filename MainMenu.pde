@@ -5,7 +5,7 @@ class MainMenu extends Screen {
   private PImage     m_logo;
   private Card[]     m_card;
   private TopBar     m_topBar;
-  private PageViewer m_slide, m_video, m_aboutEquip, m_aboutProject, m_current;
+  private PageViewer m_slide, m_video, m_aboutEquip, m_aboutProject, m_credits, m_current;
   private Card       m_currentCard = null;
 
   private float m_logoSize;
@@ -86,6 +86,10 @@ class MainMenu extends Screen {
       dimen, 
       m_topBar, 
       this.createProjectList(context));
+    m_credits = new PageViewer(context, 
+      dimen, 
+      m_topBar, 
+      this.createCredits(context));
   }
   ExpandAnimation[] createSlideList(PApplet context) {
     final ExpandAnimation[] slideList = new ExpandAnimation[3];
@@ -116,6 +120,13 @@ class MainMenu extends Screen {
   ExpandAnimation[] createProjectList(PApplet context) {
     final ExpandAnimation[] projectList = new ExpandAnimation[1];
     projectList[0] = new ExpandAnimation(context, Content.getProject());
+    projectList[0].horizontal();
+
+    return projectList;
+  }
+  ExpandAnimation[] createCredits(PApplet context) {
+    final ExpandAnimation[] projectList = new ExpandAnimation[1];
+    projectList[0] = new ExpandAnimation(context, Content.credits());
     projectList[0].horizontal().tint(0);
 
     return projectList;
@@ -140,6 +151,9 @@ class MainMenu extends Screen {
   }
   private void aboutProject(){
     m_current = m_aboutProject;
+  }
+  private void credits(){
+    m_current = m_credits;
   }
   private void cardEvents() {
     if (m_card == null) return;

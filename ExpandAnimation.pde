@@ -181,8 +181,9 @@ class ExpandAnimation {
     m_context.fill(animator.alphaBlend(Palette.main));
     m_context.textAlign(LEFT);
     m_context.text(m_textList[index], 
-                  m_x+ m_size+60,    m_y+index*(lineHeight+10)+30, 
-                  m_width-m_size-60, 80);
+                  m_x+m_size+50,    m_y+index*(lineHeight+10)+30, 
+                  m_width-m_size-50, m_textList[index].length());
+                  //m_width-m_size-60, 80);
     m_context.popStyle();
   }
 }
