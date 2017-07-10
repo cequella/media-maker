@@ -76,14 +76,14 @@ static class Content {
       title = new String[]{
         "Pesquisa", "Análise", "Resumo"};
       text = new String[]{
-        "Esolha uma fonte confiável. Leia e anote informações importantes.", 
-        "Comprar informações e orgarnizá-las em formato de tópicos.", 
-        "Escrever o básico que será descrito ao longo do trabalho."};
+        "Escolha uma fonte confiável. Leia e anote informações importantes.", 
+        "Compare informações e orgarnize-as em formato de tópicos.", 
+        "Escreva o básico que será descrito ao longo do trabalho."};
     } else if (index == 1) {
       subtitle = "Montando a Apresentação";
       icon = new String[]{
         "assets/icons/012-bookmark.png", 
-        "assets/icons/001-network.png", 
+        "assets/icons/038-start-project.png", 
         "assets/icons/001-network.png", 
         "assets/icons/014-conclusion.png", 
         "assets/icons/015-medal.png"};
@@ -92,7 +92,7 @@ static class Content {
       text = new String[]{
         "Onde devem ficar informações básicas como nome de equipe e projeto. Seja sucinto.", 
         "Explicação dos objetivos, materiais e programa utilizados. Importante para embasar o projeto.", 
-        "Conteúdo propriamente dito. Apresente o máximo possível de imagens, com texto curtos pontuais.", 
+        "Conteúdo propriamente dito. Apresente o máximo possível de imagens, com textos curtos pontuais.", 
         "Espaço destinado a apresentar o que foi aprendido e os resultados obtidos.", 
         "Alguns trabalhos exigem apresentação das referências. Dedique esse espaço às fontes de pesquisa."};
     } else {
@@ -127,8 +127,8 @@ static class Content {
       title = new String[]{
         "Idéia", "Foco", "Organização"};
       text = new String[]{
-        "Elabore brainstorms até surigr uma ideia. Então crie tópicos para lhe guiar.", 
-        "Não seja prolixo. Não perca tempo explicando coisas não importantes. Cada segundo vale muito.", 
+        "Elabore brainstorms até surgir uma ideia. Então crie tópicos para lhe guiar.", 
+        "Não perca tempo explicando coisas não importantes. Cada segundo vale muito.", 
         "Teste seu roteiro, repasse suas falas, meça o tempo... Não tenha medo de reescrever o roteiro.", };
     } else if (index == 1) {
       subtitle = "Preparando o Cenário";
@@ -216,7 +216,7 @@ static class Content {
       "assets/icons/photo/michael.jpg", 
     };
     title = new String[]{
-      "Pedro Oliveira", "Maria Bruna", "João Vitor", "Lana Campelo", "Michael Dhyani"};
+      "Pedro Oliveira", "Maria Bruna", "Victor Morais", "Lana Campelo", "Michael Dhyani"};
     text = new String[]{
       "Representante da equipe e programador", 
       "Adminstradora do blog e beta-tester", 
@@ -258,17 +258,19 @@ static class Content {
       "assets/icons/photo/smd.png", 
       "assets/icons/photo/diatec.png", 
       "assets/icons/photo/celly.jpg", 
-      "assets/icons/photo/antonio.jpg", 
+      "assets/icons/photo/antonio.jpg",
+      "assets/icons/039-flat-icon.png",
     };
     title = new String[]{
-      "SMD - UFC", "DIATEC - UFC", "Cely Martins", "Antonio Paulo"};
+      "SMD - UFC", "DIATEC - UFC", "Cely Martins", "Antonio Paulo", "FlatIcon"};
     text = new String[]{
       "Curso de Sistemas e Mídias Digitais (Universidade Virtual). Com ajuda dos profesores: "+
       "José Aires e Raquel Santiago (Cognição), Glaudiney (Narrativas), Paula Marques (Comunicação Visual) e "+
       "Ricardo Brauner(Programação II)", 
       "Departamento de Integração Acadêmica e Tecnológica da UFC (Centro de Tecnologia)", 
-      "Cliente         ",   //ISSO SIM XD HEUHEUEHUEHUEHEU
-      "Cliente         ",}; //ISSO SIM XD HEUHEUEHUEHUEHEU
+      "Cliente         ",  //HEUHEUEHUEHUEHEU
+      "Cliente         ",  //HEUHEUEHUEHUEHEU
+      "Ícones for Madebyoliver e Freepik, disponibilizado através da plataforma FlatIcon"}; //HEUHEUEHUEHUEHEU
 
     return new Content(subtitle, icon, title, text);
   }
