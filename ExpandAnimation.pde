@@ -122,7 +122,7 @@ class ExpandAnimation {
     
     m_context.fill(Palette.white);
     m_context.rect(m_x+deltaX+10,   m_y, 
-                   collumnWidth-10, 250*animator.current(), 
+                   collumnWidth-10, 250*animator.current()+20, 
                    2);
 
     // Content
@@ -146,8 +146,8 @@ class ExpandAnimation {
     m_context.fill(animator.alphaBlend(Palette.main));
     m_context.textAlign(LEFT);
     m_context.text(m_textList[index], 
-                  m_x+deltaX+20,   m_y+m_size+80, 
-                  collumnWidth-20, 80);
+                  m_x+deltaX+20,   m_y+m_size+60, 
+                  collumnWidth-20, m_textList[index].length());
     m_context.popStyle();
   }
   private void drawLine(int index, float lineHeight, float lineCenter) {
