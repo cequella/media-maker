@@ -47,12 +47,18 @@ static class Content {
   private String[] title;
   private String[] text;
   private String   subtitle;
+  private int      size;
 
   public Content(String subtitle, String[] icon, String[] title, String[] text) {
     this.subtitle = subtitle;
     this.icon = icon;
     this.title = title;
     this.text = text;
+    
+    size = min(icon.length, min(text.length, title.length));
+  }
+  public int length(){
+    return this.size;
   }
 
   public static Content getSlide(int index) {

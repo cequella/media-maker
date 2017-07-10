@@ -413,6 +413,7 @@ class PageViewer extends Widget {
   }
   public void reset(){
     m_current = 0;
+    for(int i=0; i<m_content.length; i++) m_content[i].reset();
   }
   private void checkClick() {
     if (clicked()) {

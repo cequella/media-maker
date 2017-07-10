@@ -1,5 +1,8 @@
 
 class FloatMenu {
+  final int FONT_SIZE = 16;
+  final int BACKGROUND = 0;
+  
   private PApplet  m_context;
   private float    m_x;
   private float    m_y;
@@ -10,6 +13,8 @@ class FloatMenu {
   private float    m_biggestItem = -1.0;
   private boolean  m_visible = false;
   private MainMenu m_mainMenu;
+  
+  private Animator[] m_animator;
 
   private int m_current = -1;
 
@@ -19,6 +24,14 @@ class FloatMenu {
     m_x = t_x;
     m_y = t_y;
     m_content = t_content;
+    
+    //Animation
+    m_animator = new Animator[t_content.length +1];
+    
+    m_animator[BACKGROUND] = new Animator(0.2);
+    for(int i=1; i<m_animator.length; i++){
+      m_animator[i] = new Animator(0.1);
+    }
   }
 
   public void draw() {
@@ -32,24 +45,43 @@ class FloatMenu {
       m_x -= m_biggestItem;
     }
 
-    fill(Palette.white);
-    rect(m_x, m_y, 
-      m_biggestItem+2*m_marginH, m_spacement*m_content.length+m_marginV, 
-      2);
+    // Set values;
+    final float W = m_biggestItem+2.0*m_marginH;
+    final float H = m_spacement*m_content.length+m_marginV;
+    final float SELECTOR_H = FONT_SIZE+m_marginV;
 
-    if (m_current != -1) {
-      fill(240);
-      rect(m_x, m_y +m_current*(16+m_marginV), m_biggestItem+2*m_marginH, 16+m_marginV);
-    }
-    textAlign(LEFT, TOP);
-    textSize(16);
-    for (int i=0; i<m_content.length; i++) {
-      fill(Palette.accent);
-      text(m_content[i], m_x+m_marginH, m_y+m_marginV+i*m_spacement);
+    drawSquare(W, H);
+    
+    if(m_animator[BACKGROUND].finished()){
+      drawSelector(W, SELECTOR_H);
+      writeOptions();
     }
 
     update();
     checkState();
+  }
+  private void drawSquare(float w, float h){
+    float current = m_animator[BACKGROUND].current();
+    float remaining = m_animator[BACKGROUND].remaining();
+    
+    fill(Palette.white);
+    rect(m_x+w*remaining, m_y, w*current, h*current, 2);
+  }
+  private void drawSelector(float w, float h){
+    if (m_current != -1) {
+      fill(240);
+      rect(m_x, m_y +m_current*h, w, h);
+    }
+  }
+  private void writeOptions(){
+    textAlign(LEFT, TOP);
+    textSize(FONT_SIZE);
+    for (int i=0; i<m_content.length; i++) {
+      final Animator currentAnimator = m_animator[i+1];
+      
+      fill(currentAnimator.fadeColor(Palette.white, Palette.accent));
+      text(m_content[i], m_x+m_marginH, m_y+m_marginV+i*m_spacement);
+    }
   }
 
   public FloatMenu show() {
@@ -58,6 +90,9 @@ class FloatMenu {
   }
   public FloatMenu hide() {
     m_visible = false;
+    for(int i=0; i<m_animator.length; i++){
+      m_animator[i].reset();
+    }
     return this;
   }
   public boolean isVisible() {
@@ -70,10 +105,10 @@ class FloatMenu {
     if (m_context.mousePressed) {
       switch(m_current) {
       case 0:
-        m_mainMenu.aboutEquip();
+        m_mainMenu.aboutProject();
         break;
       case 1:
-        m_mainMenu.aboutProject();
+        m_mainMenu.aboutEquip();
         break;
       case 2:
         break;
@@ -90,9 +125,11 @@ class FloatMenu {
     final int   MOUSE_Y = m_context.mouseY;
     final float TOP_MARGIN = m_y+m_marginV;
 
+    animatorsUpdate();
+
     if (MOUSE_X>m_x && MOUSE_X<m_x+m_biggestItem+2*m_marginH) {
       for (int i=0; i<m_content.length; i++) {
-        if (MOUSE_Y>TOP_MARGIN +i*(16+m_marginV) && MOUSE_Y<TOP_MARGIN+ (i+1)*(16+m_marginV)) {
+        if (MOUSE_Y>TOP_MARGIN +i*(FONT_SIZE+m_marginV) && MOUSE_Y<TOP_MARGIN+ (i+1)*(FONT_SIZE+m_marginV)) {
           if (VERBOSITY && i!=m_current) println("Opção: ", m_content[i]);
           m_current = i;
           break;
@@ -101,5 +138,29 @@ class FloatMenu {
     } else {
       m_current = -1;
     }
+  }
+  private Animator getCurrentOptionToAnimate(){
+    Animator out = null;
+      
+    for(int i=1; i<m_animator.length; i++){
+      if(!m_animator[i].finished()){
+        out = m_animator[i];
+        return out;
+      }
+    }
+    
+    return null;
+  }
+  private void animatorsUpdate(){
+    Animator backgroundAnimator = m_animator[BACKGROUND];
+    
+    backgroundAnimator.update();
+    
+    // Animate options
+    if(backgroundAnimator.finished()){
+      Animator current = getCurrentOptionToAnimate();
+      if(current!=null) current.update();
+    }
+    
   }
 }
