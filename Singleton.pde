@@ -265,12 +265,11 @@ static class Content {
       "SMD - UFC", "DIATEC - UFC", "Cely Martins", "Antonio Paulo", "FlatIcon"};
     text = new String[]{
       "Curso de Sistemas e Mídias Digitais (Universidade Virtual). Com ajuda dos profesores: "+
-      "José Aires e Raquel Santiago (Cognição), Glaudiney (Narrativas), Paula Marques (Comunicação Visual) e "+
-      "Ricardo Brauner(Programação II)", 
+      "José Aires, Raquel Santiago, Glaudiney, Paula Marques e Ricardo Brauner.", 
       "Departamento de Integração Acadêmica e Tecnológica da UFC (Centro de Tecnologia)", 
       "Cliente         ",  //HEUHEUEHUEHUEHEU
       "Cliente         ",  //HEUHEUEHUEHUEHEU
-      "Ícones for Madebyoliver e Freepik, disponibilizado através da plataforma FlatIcon"}; //HEUHEUEHUEHUEHEU
+      "Ícones por Madebyoliver e Freepik, disponibilizado através da plataforma FlatIcon"}; //HEUHEUEHUEHUEHEU
 
     return new Content(subtitle, icon, title, text);
   }
